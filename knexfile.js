@@ -1,21 +1,19 @@
-// Update with your config settings.
-
+const keys = require('./config/config'); 
 module.exports = {
 
   development: {
-    client: 'mysql',
+    client: 'postgresql',
     connection: {
-      host : '127.0.0.1',
-      user : 'root',
-      password : 'root',
-      database : 'project_2',
-      charset: 'utf8'
-    }, 
+      host : 'localhost',
+      database: 'pets',
+      user: 'postgres',
+      password: keys.dbPassword
+    },
     migrations: {
-      directory: __dirname + '/knex/migrations'
+      directory: __dirname + '/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/knex/seeds'
+      directory: __dirname + '/db/seeds/development'
     }
   },
 
@@ -23,8 +21,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
-      password: 'password'
+      user:     'postgres',
+      password: keys.dbPassword
     },
     pool: {
       min: 2,
@@ -39,8 +37,8 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
-      password: 'password'
+      user:     'postgres',
+      password: keys.dbPassword
     },
     pool: {
       min: 2,

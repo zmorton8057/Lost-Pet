@@ -11,6 +11,7 @@ const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes'); 
 const PORT = process.env.PORT || 3000;
 
+
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 

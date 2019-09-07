@@ -10,3 +10,4 @@ knex.raw('SELECT 2+2')
     throw err
 })
 module.exports = knex
+
