@@ -18,12 +18,12 @@ router.get('/allpets', function (req, res) {
 // values will be updated with front end input, please feel free to change route as well
 // my reasoning for not having a pet parameter is that the unique pet ID will be created AFTER the pet is added to the database
 // this step will be done be postgre so we don't yet have a unique ID for the pet
-router.get('/:userID/new_pet',function(req,res){
-    var userID = req.params.userID;
+router.get('/:userID/newPet',function(req,res){
+     var userID = req.params.userID;
 
     var pet = {
         pet_image: '_blank',
-        pet_name : 'Billy Bob',
+        pet_name : 'Billy',
         pet_type : 'Dog',
         pet_breed : 'Retriever',
         color : "Brown",
@@ -38,7 +38,7 @@ router.get('/:userID/new_pet',function(req,res){
         }
         knex('pets').insert(pet)
         .then(function(response){
-            console.log('Data Added to DB!')
+            console.log('Data Added to DB!'+ response)
             res.json('Pet Added')
         })
 })
