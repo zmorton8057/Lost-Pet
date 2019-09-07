@@ -20,6 +20,7 @@ router.get('/allpets', function (req, res) {
 // this step will be done be postgre so we don't yet have a unique ID for the pet
 router.get('/:userID/new_pet',function(req,res){
     var userID = req.params.userID;
+
     var pet = {
         pet_image: '_blank',
         pet_name : 'Billy Bob',
@@ -38,6 +39,7 @@ router.get('/:userID/new_pet',function(req,res){
         knex('pets').insert(pet)
         .then(function(response){
             console.log('Data Added to DB!')
+            res.json('Pet Added')
         })
 })
 // this route can be used to get data about a specific pet seachable by pet name OR pet_id (checks number vs string)
