@@ -27,7 +27,9 @@ app.use(passport.session());
 
 app.use(morgan('dev'))
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static("./app/public"));
+// app.use(express.static("./app/public"));
+// THIS WORKS WITH MESSAGE BAR BUT BREAKS OAUTH
+app.use(express.static("public"));
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
