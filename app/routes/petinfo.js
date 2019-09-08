@@ -32,8 +32,9 @@ router.get('/:userID/newPet',function(req,res){
         sex  : "Female",
         pet_age : 8,
         pet_size : "Medium",
-        lost_status :false,
-        lost_date :"none",
+        lost_status :true,
+        lost_date :"9-02-19",
+        pet_zip:91374,
         owner_id : 12345
         }
         knex('pets').insert(pet)
@@ -61,7 +62,25 @@ router.get('/allpets/:petName',function(req,res){
         res.json(response)
     });
 }
-
+})
+// This route can be used to find lost pets based on your zip code
+// the second route will be the same but if you do not input a zip code shows all current lost pets
+router.get('/lostpets/:zipcode',function(req,res){
+    knex.select('*').from('pets')
+    .where({
+        pet_zip:req.params.zipcode,
+        lost_status: true
+    }).then(function(response){
+        res.json(response)
+    })
+})
+router.get('/lostpets',function(req,res){
+    knex.select('*').from('pets')
+    .where({
+        lost_status: true
+    }).then(function(response){
+        res.json(response)
+    })
 })
 
 
