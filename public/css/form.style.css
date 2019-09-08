@@ -1,0 +1,8 @@
+
+ /* remove bullet points from ul */
+ .no-bullet {
+    list-style-type:none; }
+
+ .jumbotron {
+     background-color: grey;
+ }
