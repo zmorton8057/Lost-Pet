@@ -8,9 +8,8 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('dotenv').config();
 const keys = require('./config/config');
-const authRoutes = require('./app/routes/auth-routes/auth-routes'); 
+const authRoutes = require('./app/routes/auth-routes'); 
 const PORT = process.env.PORT || 3000;
-
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
@@ -25,7 +24,7 @@ app.use(cookieSession({
 app.use(passport.initialize()); 
 app.use(passport.session()); 
 
-app.use(morgan('dev'))
+app.use(morgan('dev')); 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("./app/public"));
 
@@ -34,12 +33,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('home')
-})
+    res.render('home');
+}); 
 
 app.use('/auth', authRoutes); 
 app.use(apiRoutes); 
 
 app.listen(PORT, function() {
-    console.log(`Listening on PORT: ${PORT}`)
-})
+    console.log(`Listening on PORT: ${PORT}`); 
+});

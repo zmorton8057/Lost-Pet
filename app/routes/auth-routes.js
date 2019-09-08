@@ -13,7 +13,6 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 }); 
 
-
 //google auth 
 router.get('/google', passport.authenticate('google', {
         scope: ['profile'],
