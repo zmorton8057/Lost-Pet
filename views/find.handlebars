@@ -2,62 +2,45 @@
 <div class="jumbotron">
     <div id="camera-section">
         <div class="text-center">
-            <i id="upload" class="btn fas fa-camera fa-10x" for="upload-photo"
-                onchange="encodeImageFileAsURL(this)"></i>
+            <i id="upload" class="fas fa-camera fa-10x" for="upload-photo" onchange="encodeImageFileAsURL(this)"></i>
         </div>
         <hr>
-        <div class="text-center">
+        <div>
             <p>
-                Take a picture!
-            </p>
-            <p>
-                Or fill out dat form yo
+                Upload a picture! Please provide as much information as possible. This will help locate my owner faster!
             </p>
         </div>
     </div>
 </div>
 
-{{!-- 
-"pet_id": 2,
-"pet_image": "_blank",
-"pet_name": "Billy",
-"pet_type": "Dog",
-"pet_breed": "Retriever",
-"color": "Brown",
-"coat_type": "Spotted",
-"coat_length": "Long Hair",
-"sex": "Female",
-"pet_age": 8,
-"pet_size": "Medium",
-"lost_status": false,
-"lost_date": "none",
-"owner_id": "12345"
---}}
-
 <div class="container">
+
     <!-- bootstrap form validation -->
     <form class="needs-validation" novalidate>
         <div class="form-row">
+
             <!-- user info -->
             <div class="form-group col-md-12">
                 <input id="name" type="text" class="form-control" placeholder="Name" required>
                 <div class="invalid-feedback">
-                    pet info
+                    Please enter your name or an alias!
                 </div>
             </div>
-            <hr class="m-3">
-        </div>
+            <div class="form-group col-md-12">
+                <input id="email" type="text" class="form-control" placeholder="Email" required>
+                <div class="invalid-feedback">
+                    name@example.com
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <input id="contact" type="text" class="form-control" placeholder="Contact" required>
+                <div class="invalid-feedback">
+                    XXX-XXX-XXXX
+                </div>
+            </div>
 
-        {{!-- toggle form button --}}
-        <div class="text-center">
-            <button id="form-show" class="btn btn-outline-dark btn-sm btn-block">Show Details</button>
-        </div>
-
-        {{!-- toggle-form - shows and hides form --}}
-        <div id="toggle-form" class="form-row">
-            <!-- form questions -->
-            <div class="toggle-form col-md-12">
-                <label for="a1">1. I have a vivid imagination</label>
+            <div class="col-md-12">
+                <label for="a1">Pet type</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q1" required>
                         <option value="" selected disabled>Please select</option>
@@ -72,8 +55,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-12">
-                <label for="q2">2. I love large parties</label>
+                <label for="q2">Breed</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q2" required>
                         <option value="" selected disabled>Please select</option>
@@ -88,8 +72,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-12">
-                <label for="q3">3. I believe in the importance of art</label>
+                <label for="q3">Color</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q3" required>
                         <option value="" selected disabled>Please select</option>
@@ -103,10 +88,10 @@
                         Me too!
                     </div>
                 </div>
-
             </div>
+
             <div class="col-md-12">
-                <label for="q4">4. I am always busy</label>
+                <label for="q4">Coat Type</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q4" required>
                         <option value="" selected disabled>Please select</option>
@@ -121,10 +106,24 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        {{!-- toggle form button --}}
+        <div class="text-center">
+            <button id="form-show" class="btn btn-outline-dark btn-sm btn-block">Show Details > > ></button>
+        </div>
+
+        {{!-- line --}}
+        <hr class="m-3">
+
+        {{!-- toggle-form - shows and hides form --}}
+        <div id="toggle-form" class="form-row">
+            <!-- form questions -->
             <div class="col-md-12">
-                <label for="q5">5. I would never cheat on my taxes </label>
+                <label for="q5">Coat Length</label>
                 <div class="form-group">
-                    <select class="form-control empty" id="q5" required>
+                    <select class="form-control empty" id="q5">
                         <option value="" selected disabled>Please select</option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Disagree)</option>
@@ -132,15 +131,12 @@
                         <option value="4">4 (Agree)</option>
                         <option value="5">5 (Strongly Agree)</option>
                     </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
                 </div>
             </div>
             <div class="col-md-12">
-                <label for="q6">6. I make people feel welcome</label>
+                <label for="q6">Sex</label>
                 <div class="form-group">
-                    <select class="form-control empty" id="q6" required>
+                    <select class="form-control empty" id="q6">
                         <option value="" selected disabled>Please select</option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Disagree)</option>
@@ -148,15 +144,12 @@
                         <option value="4">4 (Agree)</option>
                         <option value="5">5 (Strongly Agree)</option>
                     </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
                 </div>
             </div>
             <div class="col-md-12">
-                <label for="q7">7. I seek adventure</label>
+                <label for="q8">Size</label>
                 <div class="form-group">
-                    <select class="form-control empty" id="q7" required>
+                    <select class="form-control empty" id="q8">
                         <option value="" selected disabled>Please select</option>
                         <option value="1">1 (Strongly Disagree)</option>
                         <option value="2">2 (Disagree)</option>
@@ -164,57 +157,6 @@
                         <option value="4">4 (Agree)</option>
                         <option value="5">5 (Strongly Agree)</option>
                     </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label for="q8">8. I am a gamer</label>
-                <div class="form-group">
-                    <select class="form-control empty" id="q8" required>
-                        <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label for="q9">9. I love reading API documentation</label>
-                <div class="form-group">
-                    <select class="form-control empty" id="q9" required>
-                        <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <label for="q10">10. I like pineapples on my pizza</label>
-                <div class="form-group">
-                    <select class="form-control empty" id="q10" required>
-                        <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
-                    </select>
-                    <div class="invalid-feedback">
-                        Me too!
-                    </div>
                 </div>
             </div>
 
@@ -226,13 +168,11 @@
                 Find!
             </button>
         </div>
+    </form>
+
 </div>
 
 
-
-
-</form>
-</div>
 
 <!-- match modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -250,30 +190,63 @@
             <div class="modal-body">
                 <div id="match-image" class="text-center"></div>
                 <hr id="modal-split">
-                <div id="match-name" class="text-center mt-3">No match yet :(</div>
+                <div id="match-name" class="text-center mt-3">:(</div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        $("#toggle-form").hide();
-
-        $(document).ready(function () {
-            $('#upload').on('click', function () {
-                console.log('clicked');
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
             });
-            // show / hide form details
-            $("#form-show").click(function (event) {
-                event.preventDefault();
-                $("#toggle-form").toggle();
-            });
-        })
+        }, false);
+    })();
+</script>
+<script>
+    // hide form details on load
+    $("#toggle-form").hide();
 
-    </script>
-    {{!-- <!-- footer -->
+    // initialize form buttons
+    $(document).ready(function () {
+
+        // allow user to upload photo by file or camera
+        $('#upload').on('click', function () {
+            console.log('clicked');
+        });
+
+        // show / hide form details
+        $("#form-show").click(function (event) {
+            event.preventDefault();
+            $("#toggle-form").toggle();
+        });
+
+        // // when form is submitted, send to validation, get geolocation, and pass to backend
+        // // this currently breaks bootstrap form validation
+        // $('#submit-form').click(function (event) {
+        //    event.preventDefault();
+        //    console.log('find');
+        // })
+    });
+
+</script>
+{{!-- <!-- footer -->
 <footer class="footer mt-3 mb-5">
     <div class="container">
         <a href="/api/friends">Friends API</a>
@@ -282,7 +255,7 @@
     </div>
 </footer> --}}
 
-    {{!-- <!-- js -->
+{{!-- <!-- js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     crossorigin="anonymous"></script>
