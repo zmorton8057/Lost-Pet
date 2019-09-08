@@ -1,15 +1,19 @@
 <!-- header -->
 <div class="jumbotron">
     <div id="camera-section">
-        <div class="text-center">
+        <div id="jumbotron-top" class="text-center">
+
+            {{!-- fontawesome camera; upload file or file --}}
             <i id="upload" class="fas fa-camera fa-8x" for="upload-photo" onchange="encodeImageFileAsURL(this)"></i>
+            <input type="file" id="upload-image" style="display: none;" />
+
         </div>
         <hr>
-        <div>
-            <p>
-                Upload a picture! Provide as much info as possible! This will help locate my owner faster!
-            </p>
-        </div>
+        <div id="jumbotron-bottom" class="text-center"></div>
+
+        <p id="form-message">
+            Upload a picture! Provide as much info as possible! This will help locate my owner faster!
+        </p>
     </div>
 </div>
 
@@ -172,8 +176,6 @@
 
 </div>
 
-
-
 <!-- match modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -198,7 +200,7 @@
         </div>
     </div>
 </div>
-
+<p id="b64"></p>
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -229,6 +231,7 @@
         // allow user to upload photo by file or camera
         $('#upload').on('click', function () {
             console.log('clicked');
+            $("input[id='upload-image']").click();
         });
 
         // show / hide form details
@@ -244,6 +247,40 @@
         //    console.log('find');
         // })
     });
+
+    // if file exists, read file and get 
+    let images = [];
+    function readFile() {
+        if (this.files && this.files[0]) {
+            var FR = new FileReader();
+
+            FR.addEventListener("load", function (e) {
+
+                // apply image to jumbotron
+                uploadImageMessage(e.target.result);
+
+                // apply file as base 64 string
+                document.getElementById("b64").innerHTML = e.target.result;
+                images.push(e.target.result);
+                console.log(images)
+            });
+
+            FR.readAsDataURL(this.files[0]);
+
+        }
+    }
+
+    function uploadImageMessage(image) {
+        $('#form-message').empty();
+        $("#upload").toggle();
+        $('#jumbotron-bottom').append(`<img src="${image}" alt="image" class="responsive center-block">`);
+        $('#form-message').append('<hr>');
+        $('#form-message').append('<input type="file" id="upload-image" style="display: none;" />');
+        $('#form-message').append('<i id="upload" class="fas fa-camera fa-3x" for="upload-photo" onchange="encodeImageFileAsURL(this)"></i>')
+        $('#form-message').append('<span class="ml-2">Retake photo</span><input type="file" id="upload-image" style="display: none;" />')
+
+    }
+    document.getElementById("upload-image").addEventListener("change", readFile)
 
 </script>
 {{!-- <!-- footer -->
