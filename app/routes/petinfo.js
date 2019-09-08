@@ -37,6 +37,7 @@ router.get('/:userID/newPet',function(req,res){
         pet_zip:91374,
         owner_id : 12345
         }
+        
         knex('pets').insert(pet)
         .then(function(response){
             console.log('Data Added to DB!'+ response)
