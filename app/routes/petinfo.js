@@ -43,7 +43,7 @@ router.get('/:userID/newPet',function(req,res){
             res.json('Pet Added')
         })
 })
-// this route can be used to get data about a specific pet seachable by pet name OR pet_id (checks number vs string)
+// this route can be used to get data about a specific pet searchable by pet name OR pet_id (checks number vs string)-Eric M
 router.get('/allpets/:petName',function(req,res){
     var petName = req.params.petName;
 
@@ -64,7 +64,7 @@ router.get('/allpets/:petName',function(req,res){
 }
 })
 // This route can be used to find lost pets based on your zip code
-// the second route will be the same but if you do not input a zip code shows all current lost pets
+// the second route will be the same but if you do not input a zip code shows all current lost pets- Eric M
 router.get('/lostpets/:zipcode',function(req,res){
     knex.select('*').from('pets')
     .where({
