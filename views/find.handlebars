@@ -39,23 +39,19 @@
     <form class="needs-validation" novalidate>
         <div class="form-row">
             <!-- user info -->
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <input id="name" type="text" class="form-control" placeholder="Name" required>
                 <div class="invalid-feedback">
-                    Name required!
-                </div>
-            </div>
-            <div class="form-group col-md-6">
-                <input id="image" type="text" class="form-control" placeholder="Link to Image" required>
-                <div class="invalid-feedback">
-                    Link to image required!
+                    pet info
                 </div>
             </div>
             <hr class="m-3">
         </div>
 
         {{!-- toggle form button --}}
-        <button id="form-show">Click Me</button>
+        <div class="text-center">
+            <button id="form-show" class="btn btn-outline-dark btn-sm btn-block">Show Details</button>
+        </div>
 
         {{!-- toggle-form - shows and hides form --}}
         <div id="toggle-form" class="form-row">
@@ -223,13 +219,17 @@
             </div>
 
         </div>
+        <div class="text-center">
+            <!-- Link to open the modal and Submit Form -->
+            <button id="submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit" data-toggle="modal"
+                data-target="#exampleModal">
+                Find!
+            </button>
+        </div>
 </div>
 
-<!-- Link to open the modal and Submit Form -->
-<button id="submit-form" class="btn btn-dark btn-primary-outline mt-2" type="submit" data-toggle="modal"
-    data-target="#exampleModal">
-    Find!
-</button>
+
+
 
 </form>
 </div>
@@ -259,6 +259,8 @@
     </div>
 
     <script>
+        $("#toggle-form").hide();
+
         $(document).ready(function () {
             $('#upload').on('click', function () {
                 console.log('clicked');
