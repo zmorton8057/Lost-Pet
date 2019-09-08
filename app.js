@@ -10,9 +10,9 @@ require('dotenv').config();
 const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes'); 
 const PORT = process.env.PORT || 3000;
+const path = require('path');
 
-
-app.engine('handlebars', exphbs());
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 //use cookie encoder
@@ -29,7 +29,7 @@ app.use(morgan('dev'))
 // Serve static content for the app from the "public" directory in the application directory.
 // app.use(express.static("./app/public"));
 // THIS WORKS WITH MESSAGE BAR BUT BREAKS OAUTH
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
