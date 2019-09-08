@@ -9,6 +9,7 @@ const passport = require('passport');
 require('dotenv').config();
 const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes'); 
+const fileRoute = require('./app/routes/file-upload-route');
 const PORT = process.env.PORT || 3000;
 
 
@@ -39,6 +40,9 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoutes); 
 app.use(apiRoutes); 
+
+//route to upload File to S3
+app.use(fileRoute);
 
 app.listen(PORT, function() {
     console.log(`Listening on PORT: ${PORT}`)
