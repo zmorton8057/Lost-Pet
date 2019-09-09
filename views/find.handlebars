@@ -1,6 +1,9 @@
+{{!-- notes - vincent nguyen --}}
 <!-- header -->
 <div class="jumbotron">
     <div id="camera-section">
+
+        {{!-- top section of jumbotron --}}
         <div id="jumbotron-top" class="text-center">
 
             {{!-- fontawesome camera; upload file or file --}}
@@ -8,51 +11,35 @@
             <input type="file" id="upload-image" style="display: none;" />
 
         </div>
-        <hr>
-        <div id="jumbotron-bottom" class="text-center"></div>
 
+        {{!-- line --}}
+        <hr>
+
+        {{!-- lower section of jumbotron --}}
+        <div id="jumbotron-bottom"></div>
+
+        {{!-- form message --}}
         <p id="form-message">
             Upload a picture! Provide as much info as possible! This will help locate my owner faster!
         </p>
+
     </div>
 </div>
 
 <div class="container">
 
-    <!-- bootstrap form validation -->
+    <!-- bootstrap form validation; required questions -->
     <form class="needs-validation" novalidate>
         <div class="form-row">
 
-            <!-- user info -->
-            <div class="form-group col-md-12">
-                <input id="name" type="text" class="form-control" placeholder="Name" required>
-                <div class="invalid-feedback">
-                    Please enter your name or an alias!
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <input id="email" type="text" class="form-control" placeholder="Email" required>
-                <div class="invalid-feedback">
-                    name@example.com
-                </div>
-            </div>
-            <div class="form-group col-md-12">
-                <input id="contact" type="text" class="form-control" placeholder="Contact" required>
-                <div class="invalid-feedback">
-                    XXX-XXX-XXXX
-                </div>
-            </div>
-
+            {{!-- pet info --}}
             <div class="col-md-12">
                 <label for="a1">Pet type</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q1" required>
                         <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
+                        <option value="1">Doggo</option>
+                        <option value="2">Gato</option>
                     </select>
                     <div class="invalid-feedback">
                         Me too!
@@ -61,14 +48,29 @@
             </div>
 
             <div class="col-md-12">
-                <label for="q2">Breed</label>
+                <label for="q2">Breed - js this</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q2" required>
                         <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
+                        <option value="1">Theres</option>
+                        <option value="2">a</option>
+                        <option value="3">ton</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="q3">Color - js vs html</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q3" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Brown</option>
+                        <option value="2">Black</option>
+                        <option value="3">Pink</option>
+                        <option value="4">JS this</option>
                         <option value="5">5 (Strongly Agree)</option>
                     </select>
                     <div class="invalid-feedback">
@@ -78,15 +80,13 @@
             </div>
 
             <div class="col-md-12">
-                <label for="q3">Color</label>
+                <label for="q8">Size</label>
                 <div class="form-group">
-                    <select class="form-control empty" id="q3" required>
+                    <select class="form-control empty" id="q8" required>
                         <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
+                        <option value="1">Small</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Large</option>
                     </select>
                     <div class="invalid-feedback">
                         Me too!
@@ -99,11 +99,12 @@
                 <div class="form-group">
                     <select class="form-control empty" id="q4" required>
                         <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
+                        <option value="1">Short-coated (or smooth-coated)</option>
+                        <option value="2">Medium-coated</option>
+                        <option value="3">Long-coated</option>
+                        <option value="4">Wire coated</option>
+                        <option value="5">Curly-coated</option>
+                        <option value="6">Hairless</option>
                     </select>
                     <div class="invalid-feedback">
                         Me too!
@@ -113,94 +114,121 @@
 
         </div>
 
-        {{!-- toggle form button --}}
-        <div class="text-center">
-            <button id="form-show" class="btn btn-outline-dark btn-sm btn-block">Show Details > > ></button>
-        </div>
 
-        {{!-- line --}}
-        <hr class="m-3">
+        <div class="form-row">
 
-        {{!-- toggle-form - shows and hides form --}}
-        <div id="toggle-form" class="form-row">
-            <!-- form questions -->
-            <div class="col-md-12">
-                <label for="q5">Coat Length</label>
-                <div class="form-group">
-                    <select class="form-control empty" id="q5">
-                        <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
-                    </select>
-                </div>
-            </div>
+            <!-- not required questions -->
             <div class="col-md-12">
                 <label for="q6">Sex</label>
                 <div class="form-group">
                     <select class="form-control empty" id="q6">
                         <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-12">
-                <label for="q8">Size</label>
-                <div class="form-group">
-                    <select class="form-control empty" id="q8">
-                        <option value="" selected disabled>Please select</option>
-                        <option value="1">1 (Strongly Disagree)</option>
-                        <option value="2">2 (Disagree)</option>
-                        <option value="3">3 (Neutral)</option>
-                        <option value="4">4 (Agree)</option>
-                        <option value="5">5 (Strongly Agree)</option>
-                    </select>
-                </div>
+            {{!-- toggle form button --}}
+            <div class="text-center">
+                <button id="form-show" class="btn-outline-info btn-block">It's OK to contact me</button>
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr class="m-3">
+
+        {{!-- toggle show / hide contact --}}
+        <div class="col-md-12" id="toggle-form">
+
+            {{!-- finder contact message --}}
+            <p>We will connect you to the owner if there is a match!</p>
+
+            <!-- finder info; not required -->
+            <div class="form-group col-md-12">
+                <input id="name" type="text" class="form-control" placeholder="Name">
             </div>
 
+            <div class="form-group col-md-12">
+                <input id="email" type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group col-md-12">
+                <input id="contact" type="text" class="form-control" placeholder="Contact">
+            </div>
         </div>
+
+        {{!-- line --}}
+        <hr>
+
+
         <div class="text-center">
             <!-- Link to open the modal and Submit Form -->
             <button id="submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit" data-toggle="modal"
                 data-target="#exampleModal">
-                Find!
+                Find Me!
             </button>
         </div>
-    </form>
 
+    </form>
 </div>
 
 <!-- match modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="match-title">Please fill out the form!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="match-title">Thank you!</h5>
             </div>
 
             <!-- display match in modal -->
             <div class="modal-body">
-                <div id="match-image" class="text-center"></div>
-                <hr id="modal-split">
-                <div id="match-name" class="text-center mt-3">:(</div>
+                <p>Where did you find me?</p>
+
+                {{!-- geolocation --}}
+                <button id="find-me" class="btn-outline-info btn-block">Use geolocation</button>
+                <p id="status"></p>
+                <a id="map-link" target="_blank"></a>
+
+                {{!-- manual location --}}
+                <button id="toggle-location" class="btn-outline-dark btn-block">I want to enter the
+                    location manually</button>
+
+                {{!-- manual location form --}}
+                <div class="col-auto mt-3">
+                    <form id="toggle-location-form">
+                        <hr>
+                        <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="submit-finder-contact" type="button" class="btn btn-outline-primary"
+                    data-dismiss="modal">Submit</button>
+
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+
 <p id="b64"></p>
+
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
@@ -221,9 +249,11 @@
         }, false);
     })();
 </script>
+
 <script>
     // hide form details on load
     $("#toggle-form").hide();
+    $('#toggle-location-form').hide();
 
     // initialize form buttons
     $(document).ready(function () {
@@ -240,6 +270,12 @@
             $("#toggle-form").toggle();
         });
 
+
+        // show / hide location form
+        $("#toggle-location").click(function (event) {
+            event.preventDefault();
+            $("#toggle-location-form").toggle();
+        });
         // // when form is submitted, send to validation, get geolocation, and pass to backend
         // // this currently breaks bootstrap form validation
         // $('#submit-form').click(function (event) {
@@ -269,11 +305,12 @@
 
         }
     }
-
+    // IMAGE ROUTE /IMAGE-UPLOAD
+    // response.data.imageUrl
     function uploadImageMessage(image) {
         $('#form-message').empty();
         $("#upload").toggle();
-        $('#jumbotron-bottom').append(`<img src="${image}" alt="image" class="responsive center-block">`);
+        $('#form-message').append(`<img src="${image}" alt="image" class="responsive text-center">`);
         $('#form-message').append('<hr>');
         $('#form-message').append('<input type="file" id="upload-image" style="display: none;" />');
         $('#form-message').append('<i id="upload" class="fas fa-camera fa-3x" for="upload-photo" onchange="encodeImageFileAsURL(this)"></i>')
@@ -282,6 +319,50 @@
     }
     document.getElementById("upload-image").addEventListener("change", readFile)
 
+</script>
+
+{{!-- geolocation --}}
+<script>
+    if ("geolocation" in navigator) {
+        /* geolocation is available */
+        console.log('geolocation available on this device');
+    } else {
+        /* geolocation IS NOT available */
+        console.log('geolocation NOT available on this device');
+
+    }
+
+    function geoFindMe() {
+
+        const status = document.querySelector('#status');
+        const mapLink = document.querySelector('#map-link');
+
+        mapLink.href = '';
+        mapLink.textContent = '';
+
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            status.textContent = '';
+            mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+            mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+        }
+
+        function error() {
+            status.textContent = 'Unable to retrieve your location';
+        }
+
+        if (!navigator.geolocation) {
+            status.textContent = 'Geolocation is not supported by your browser';
+        } else {
+            status.textContent = 'Locating…';
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+    }
+
+    document.querySelector('#find-me').addEventListener('click', geoFindMe);
 </script>
 {{!-- <!-- footer -->
 <footer class="footer mt-3 mb-5">
