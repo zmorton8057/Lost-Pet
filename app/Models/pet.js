@@ -24,6 +24,28 @@ var Pet = {
       .catch(function(err) {
         if (err) throw err;
       });
+  },
+  addPet: function(petObj, cb) {
+    knex("pets")
+      .insert(petObj)
+      .then(function(response) {
+        console.log("Data Added to DB!" + response);
+        cb.json("Pet Added");
+      })
+      .catch(function(err) {
+        if (err) throw err;
+      });
+  },
+  removePet: function(petId, cb) {
+    knex("pets")
+      .where(pet_id, petId)
+      .del()
+      .then(function(res) {
+        cb.send(res);
+      })
+      .catch(function(err) {
+        if (err) throw err;
+      });
   }
 };
 

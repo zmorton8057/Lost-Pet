@@ -40,5 +40,10 @@ router.get('/api/:ownerId', function(req, res) {
     Pets.selectAllOwnerPets(ownerId, res);
 });
 
+router.post('/api/addPet', function(req, res) {
+    console.log(req.body);
+
+    Pets.addPet(req.body, res);
+})
 
 module.exports = router
