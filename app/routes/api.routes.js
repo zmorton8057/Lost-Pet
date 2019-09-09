@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
-var User = require('../resources/users')
+var User = require('../resources/users');
+var Pets = require('../Models/pet');
 
 // router.post('/api/users', function (req, res) {
 //     User.create(req.body)
@@ -28,8 +29,22 @@ var User = require('../resources/users')
 //     res.send('delete')
 // })
 
-router.get('/:owner/:pet', function(req, res) {
-    var ownerName = req.params.owner;
-    var petName = req.params.pet;
+//Route to get all pets
+router.get('/api/allPets', function(req, res) {
+    Pets.getAllPets(res);
+});
+
+router.get('/api/:ownerId', function(req, res) {
+    var ownerId = req.params.ownerId;
+
+    Pets.selectAllOwnerPets(ownerId, res);
+});
+
+router.post('/api/addPet', function(req, res) {
+    console.log(req.body);
+
+    Pets.addPet(req.body, res);
 })
+
+
 module.exports = router

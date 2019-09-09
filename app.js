@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const apiRoutes = require('./app/routes/api.routes');
+// added pet route require to get newpet.js Eric Malvar
+const petRoute = require('./app/routes/petinfo.js')
 const app = express();
 const exphbs  = require('express-handlebars');
 const passportSetup = require('./config/passport-setup'); 
@@ -40,6 +42,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoutes); 
 app.use(apiRoutes); 
+app.use(petRoute);
 
 //route to upload File to S3
 app.use(fileRoute);
