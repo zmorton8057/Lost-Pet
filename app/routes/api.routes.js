@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
-var User = require('../resources/users')
+var User = require('../resources/users');
+var Pets = require('../Models/pet');
 
 router.post('/api/users', function (req, res) {
     User.create(req.body)
@@ -27,5 +28,9 @@ router.put('/api/users/:id', function (req, res) {
 router.delete('/api/users/:id', function (req, res) {
     res.send('delete')
 })
+
+router.get('/api/allPets', function(req, res) {
+    Pets.getAllPets(res);
+}) 
 
 module.exports = router
