@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const apiRoutes = require('./app/routes/api.routes');
 // added pet route require to get newpet.js Eric Malvar
-const petRoute = require('./app/routes/petinfo.js')
+const petRoute = require('./app/routes/petinfo')
 const app = express();
 const exphbs  = require('express-handlebars');
 const passportSetup = require('./config/passport-setup'); 

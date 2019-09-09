@@ -7,7 +7,7 @@ var knex = require('../../app/db/knex')
 // used to get information about all pets if needed
 // this route will list ALL pets in DB as JSON, as it fills up we can limit search if needed
 router.get('/allpets', function (req, res) {
-        knex.select('*').from('pets')
+        knex.select('*').from('user_pets')
         .then(function(response){
          console.log(response)
          res.json(response);
@@ -22,23 +22,22 @@ router.get('/:userID/newPet',function(req,res){
      var userID = req.params.userID;
 
     var pet = {
-        pet_image: '_blank',
+        pet_image1: '_blank',
         pet_name : 'Billy',
         pet_type : 'Dog',
         pet_breed : 'Retriever',
-        color : "Brown",
-        coat_type : "Spotted",
-        coat_length : "Long Hair",
+        color : 'Brown',    
+         coat_type : "Silky",
+        coat_length : "sLong Hair",
         sex  : "Female",
         pet_age : 8,
-        pet_size : "Medium",
-        lost_status :true,
+        pet_size : "M",
+        lost_status : true,
         lost_date :"9-02-19",
         pet_zip:91374,
         owner_id : 12345
         }
-        
-        knex('pets').insert(pet)
+        knex('user_pets').insert(pet)
         .then(function(response){
             console.log('Data Added to DB!'+ response)
             res.json('Pet Added')
@@ -49,34 +48,35 @@ router.get('/allpets/:petName',function(req,res){
     var petName = req.params.petName;
 
     if (isNaN(Number(petName))){
-    knex.select('*').from('pets')
+    knex.select('*').from('user_pets')
     .where({
         pet_name: petName
     }).then(function(response){
         res.json(response)
     });
 }else {
-    knex.select('*').from('pets')
+    knex.select('*').from('user_pets')
     .where({
         pet_id: petName
     }).then(function(response){
         res.json(response)
-    });
+    })
 }
 })
 // This route can be used to find lost pets based on your zip code
-// the second route will be the same but if you do not input a zip code shows all current lost pets- Eric M
-router.get('/lostpets/:zipcode',function(req,res){
-    knex.select('*').from('pets')
+// the second route will find all lost pets
+router.get('/lostpets/:zip',function(req,res){
+    var zip = req.params.zip
+    knex.select('*').from('user_pets')
     .where({
-        pet_zip:req.params.zipcode,
-        lost_status: true
+        lost_status: true,
+        pet_zip:zip
     }).then(function(response){
         res.json(response)
     })
 })
 router.get('/lostpets',function(req,res){
-    knex.select('*').from('pets')
+    knex.select('*').from('user_pets')
     .where({
         lost_status: true
     }).then(function(response){
@@ -84,6 +84,4 @@ router.get('/lostpets',function(req,res){
     })
 })
 
-
-
-module.exports = router; 
+module.exports = router;
