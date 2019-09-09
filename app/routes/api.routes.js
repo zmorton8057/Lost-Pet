@@ -29,8 +29,16 @@ router.delete('/api/users/:id', function (req, res) {
     res.send('delete')
 })
 
+//Route to get all pets
 router.get('/api/allPets', function(req, res) {
     Pets.getAllPets(res);
-}) 
+});
+
+router.get('/api/:ownerId', function(req, res) {
+    var ownerId = req.params.ownerId;
+
+    Pets.selectAllOwnerPets(ownerId, res);
+});
+
 
 module.exports = router
