@@ -1,20 +1,18 @@
 
  /* remove bullet points from ul */
- .no-bullet {
-    list-style-type:none; }
+.no-bullet {
+    list-style-type:none; 
+}
 
 /* shorten jumbotron */
- .jumbotron {
+.jumbotron {
      padding-top: 20px;
      padding-bottom: 10px;
- }
- /* .jumbotron{
-	background-image: url('path/image.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
-}  */
+}
+
+/* image responsiveness */
 .responsive {
     width: 100%;
     max-width: 400px;
     height: auto;
-  }
+}
