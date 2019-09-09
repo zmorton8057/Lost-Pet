@@ -28,7 +28,7 @@ router.get('/:userID/newPet',function(req,res){
         pet_breed : 'Retriever',
         color : 'Brown',    
          coat_type : "Silky",
-        coat_length : "sLong Hair",
+        coat_length : "Long Hair",
         sex  : "Female",
         pet_age : 8,
         pet_size : "M",
