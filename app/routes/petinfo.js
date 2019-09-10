@@ -18,31 +18,24 @@ router.get('/allpets', function (req, res) {
 // values will be updated with front end input, please feel free to change route as well
 // my reasoning for not having a pet parameter is that the unique pet ID will be created AFTER the pet is added to the database
 // this step will be done be postgre so we don't yet have a unique ID for the pet
-router.get('/:userID/newPet',function(req,res){
+router.post('/:userID/newPet',function(req,res){
      var userID = req.params.userID;
-
-    var pet = {
-        pet_image: '_blank',
-        pet_name : 'Billy',
-        pet_type : 'Dog',
-        pet_breed : 'Retriever',
-        color : "Brown",
-        coat_type : "Spotted",
-        coat_length : "Long Hair",
-        sex  : "Female",
-        pet_age : 8,
-        pet_size : "Medium",
-        lost_status :true,
-        lost_date :"9-02-19",
-        pet_zip:91374,
-        owner_id : 12345
-        }
         
-        knex('user_pets').insert(pet)
+        knex('user_pets').insert(req.body)
         .then(function(response){
             console.log('Data Added to DB!'+ response)
             res.json('Pet Added')
         })
+})
+// adding a pet that has been encountered by someone who sees a lost pet similar to above code for user pet
+router.post('/encounteredPet',function(req,res){
+    var userID = req.params.userID;
+       
+       knex('lost_pets').insert(req.body)
+       .then(function(response){
+           console.log('Data Added to DB!'+ req.body)
+           res.json('Pet Added')
+       })
 })
 // this route can be used to get data about a specific pet searchable by pet name OR pet_id (checks number vs string)-Eric M
 router.get('/allpets/:petName',function(req,res){
