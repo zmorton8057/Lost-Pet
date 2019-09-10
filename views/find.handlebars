@@ -1,1 +1,65 @@
-<h1>find</h1>
+<div class="jumbotron">
+
+    <div id="jumbotron-top" class="text-center"></div>
+
+
+    {{!-- fontawesome camera; upload file or file --}}
+    <div class="camera text-center">
+        <i id="upload" class="fas fa-camera fa-8x" for="upload-photo"></i>
+        <input type="file" id="upload-image" />
+    </div>
+
+    <hr>
+    {{!-- bottom section of jumbotron --}}
+    <div id="jumbotron-bottom"></div>
+
+    {{!-- form message --}}
+    <p id="form-message">
+        Upload a picture! Provide as much info as possible! This will help locate my owner faster!
+    </p>
+
+</div>
+
+<script>
+    // init all buttons
+    $(document).ready(function () {
+
+        // upload image when camera icon is clicked
+        $(document).on('click', '#upload', function () {
+            $(`input[id='upload-image']`).trigger('click');
+            document.getElementById('upload-image').addEventListener('change', readFile);
+        });
+    });
+
+    // read uploaded image
+    function readFile() {
+        if (this.files && this.files[0]) {
+            var FR = new FileReader();
+
+            FR.addEventListener('load', function (base64Img) {
+
+                // pass base64 image to be uploaded to jumbotron
+                displayPhoto(base64Img.target.result);
+                retakePhoto();
+
+
+            });
+
+            FR.readAsDataURL(this.files[0]);
+        }
+    };
+
+    function retakePhoto() {
+        $('#form-message').empty();
+        $('#form-message').text('create message');
+
+    };
+
+    function displayPhoto(image) {
+        $('.camera').empty();
+        $('#jumbotron-top').append(`<img src="${image}" alt="image" class="responsive text-center">`);
+
+    }
+
+
+</script>
