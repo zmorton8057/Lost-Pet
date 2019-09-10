@@ -1,12 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Example App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pet 911</title>
+    {{!-- bootstrap link --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    {{!-- demo.css for message display --}}
+    <link rel="stylesheet" type="text/css" href="./demo/style/index.css" />
+    {{!-- overhang message display req files --}}
+    <link rel="stylesheet" type="text/css" href="./dist/overhang.min.css" />
+    <link rel="stylesheet" type="text/css" href="./demo/style/prism.css" />
+    <link rel="stylesheet" type="text/css" href="demo/carousel/card.css" />
+    {{!-- fontawesome CDN --}}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    {{!-- JQuery cdn --}}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    {{!-- AJAX cdn --}}
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    {{!-- Overhang additonal req files --}}
+    <script type="text/javascript" src="./dist/overhang.min.js"></script>
+    <script type="text/javascript" src="./demo/js/prism.js"></script>
+    <script type="text/javascript" src="./demo/js/index.js"></script>
+    {{!-- Nav bar css file --}}
+    <link rel="stylesheet" type="text/css" href="/style/nav.css" />
 </head>
+
 <body>
- 
-    {{{body}}}
- 
+    {{!-- body will be displayed from this section --}}
+    <div class="container">
+        {{{body}}}
+    </div>
+
+    <!-- Navbar that will persist through every page -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{!-- Link for google authentication --}}
+                    <a href="/auth/google">
+                        <button type="button" class="btn btn-outline-secondary btn-lg btn-block">Login</button>
+                    </a>
+                    </span>
+                </div>
+                <div class="col footer-padding-fix">
+                    <span>
+                        <button type="button" class="btn btn-outline-danger btn-lg btn-block ">Find Me!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="demo/carousel/card.js"></script>
+
 </html>
