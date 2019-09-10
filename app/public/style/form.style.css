@@ -16,3 +16,8 @@
     max-width: 400px;
     height: auto;
 }
+
+/* hides upload / input button */
+#upload-image {
+    display: none;
+}
