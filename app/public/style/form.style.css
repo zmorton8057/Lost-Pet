@@ -1,7 +1,7 @@
 
  /* remove bullet points from ul */
  .no-bullet {
-    list-style-type:none; 
+    list-style-type: none; 
 }
 
 /* shorten jumbotron */
@@ -20,4 +20,9 @@
 /* hides upload / input button */
 #upload-image {
     display: none;
+}
+
+/* limit size to uploaded images */
+.uploaded-images {
+    max-width: 300px;
 }
