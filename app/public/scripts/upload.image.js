@@ -1,3 +1,4 @@
+// author - vn //
 var images = [];
 
 // init all buttons
@@ -31,6 +32,7 @@ function readFile() {
     }
 };
 
+// display smaller photo icon 
 function retakePhoto(image) {
     $('#form-message').empty();
     $('#form-message').append('<i id="upload" class="fas fa-camera fa-3x" for="upload-photo"></i>');
@@ -39,12 +41,14 @@ function retakePhoto(image) {
 
 };
 
+// display photo to top of jumbotron
 function displayPhoto(image) {
     $('.camera').empty();
     $('#jumbotron-top').append(`<img src="${image}" alt="image" class="uploaded-images responsive text-center mb-2 remove-img">`);
     retakePhoto(image);
 };
 
+// set max photos to 3
 function maxPhotos(image) {
     images.push(image);
     if (images.length > 3) {
