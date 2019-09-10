@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoutes); 
 app.use(apiRoutes); 
-app.use(petRoute);
+app.use('/query/petinfo',petRoute);
 
 //route to upload File to S3
 app.use(fileRoute);
