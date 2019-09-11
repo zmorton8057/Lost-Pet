@@ -46,5 +46,10 @@ router.post('/api/addPet', function(req, res) {
     Pets.addPet(req.body, res);
 })
 
+router.post('/api/addImage', function(req, res) {
+    console.log('in func' + req.body);
+    Pets.addImageToPet(req.body, res);
+})
+
 
 module.exports = router

@@ -6,6 +6,7 @@ var upload = require('../services/upload-file');
 var sinlgeUpload = upload.single('image');
 
 router.post('/image-upload', function(req, res) {
+    console.log("in image");
     sinlgeUpload(req, res, function(err) {
         return res.json({'imageUrl': req.file.location})
     })
