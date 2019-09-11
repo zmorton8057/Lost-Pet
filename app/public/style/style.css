@@ -6,9 +6,9 @@ body {
     font-size: 25px
 }
 
-footer {
+/* footer {
     background: #D4DEEA
-}
+} */
 
 /* styles navbar */
 #nav-css {
@@ -38,39 +38,7 @@ a {
     left: 50%;
    }
 
-   .custom-card-deck,
-.custom-card-deck .mbsc-lv-v {
-    height: 400px;
-    max-width: 500px;
-    margin: 15px auto;
-}
 
-.custom-card-deck .mbsc-lv-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-}
-
-.custom-card-deck .mbsc-lv-item.mbsc-lv-item-swiping {
-    z-index: 10;
-}
-
-.custom-card-deck .custom-card {
-    height: 320px;
-}
-
-.custom-card-deck .custom-card-rotate-right {
-    transform: rotate(1deg);
-}
-
-.custom-card-deck .custom-card-rotate-left {
-    transform: rotate(-2deg);
-}
-
-.custom-card-deck .mbsc-card.custom-card {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
-}
 
 #frame {
     background: rgb(107, 153, 209)
@@ -93,7 +61,11 @@ a {
 #app-name {
     /* font-family: 'Gayathri', sans-serif; */
     position: relative;
-    left: 34%; 
+    left: 32%; 
     color: #D4DEEA; 
     font-size: 40px
 }
+
+.maxWidth {
+    max-width: 10rem;
+}; 

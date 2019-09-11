@@ -1,0 +1,179 @@
+/* Required Classes for Carousel */
+
+.card-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.card-carousel .my-card {
+    height: 40rem;
+    width: 9rem;
+    position: relative;
+    z-index: 1;
+    -webkit-transform: scale(0.6) translateY(-2rem);
+    transform: scale(0.6) translateY(-2rem);
+    opacity: 0;
+    cursor: pointer;
+    pointer-events: none;
+    background: #e9f3f8;
+    background: linear-gradient(totop, #2e5266, #6e8898);
+    transition: 1s;
+}
+
+.card-carousel .my-card:after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: -3rem;
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+}
+
+.card-carousel .my-card.active {
+    z-index: 3;
+    -webkit-transform: scale(1) translateY(0) translateX(0);
+    transform: scale(1) translateY(0) translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 1s;
+}
+
+.card-carousel .my-card.prev,
+.card-carousel .my-card.next {
+    z-index: 2;
+    -webkit-transform: scale(0.8) translateY(-1rem) translateX(0);
+    transform: scale(0.8) translateY(-1rem) translateX(0);
+    opacity: 0.6;
+    pointer-events: auto;
+    transition: 1s;
+}
+
+/* Customizable Classes for Carousel */
+
+.card-carousel .my-card:nth-child(0):before {
+      content:'0';
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      font-size:3rem;
+      font-weight:300;
+      color:#fff;
+    }
+    
+    .card-carousel .my-card:nth-child(1):before {
+      content:'1';
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      font-size:3rem;
+      font-weight:300;
+      color:#fff;
+    }
+    
+    .card-carousel .my-card:nth-child(2):before {
+      content:'2';
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      font-size:3rem;
+      font-weight:300;
+      color:#fff;
+    }
+    
+    .card-carousel .my-card:nth-child(3):before {
+      content:'3';
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      font-size:3rem;
+      font-weight:300;
+      color:#fff;
+    }
+    
+    .card-carousel .my-card:nth-child(4):before {
+      content:'4';
+      position:absolute;
+      top:50%;
+      left:50%;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      font-size:3rem;
+      font-weight:300;
+      color:#fff;
+    }
+
+    .my-card{
+        min-width: 70%;
+    }
+    
+
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        /* max-width: 300px; */
+        margin: auto;
+        text-align: center;
+      }
+      
+      .title {
+        color: grey;
+        font-size: 18px;
+      }
+      
+      button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+      }
+      
+      a {
+        text-decoration: none;
+        font-size: 22px;
+        color: black;
+      }
+      
+      button:hover, a:hover {
+        opacity: 0.7;
+      }
+
+      .image-profile{
+          max-width: 300px;
+          margin-top: 2%;
+      }
+
+
+
+      html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    
+
+    @media only screen and (max-width: 600px) {
+      .card-carousel .my-card {
+        width: 5rem;
+    }
+    }
+
+  
