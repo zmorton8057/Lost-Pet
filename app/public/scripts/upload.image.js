@@ -14,7 +14,14 @@ $(document).ready(function () {
     $(document).on('click', '.remove-img', function () {
         var thisImg = $(this).attr('src');
         $(this).remove();
-        images = images.filter(a => a !== thisImg)
+        // remove this image from the array
+        var newimages = images.indexOf(thisImg);
+
+        if (newimages > -1) {
+            let temp = images.splice(newimages, 1);
+        }
+
+        maxPhotos(images.length);
     });
 });
 
@@ -27,34 +34,38 @@ function readFile() {
 
             // pass base64 image to be uploaded to jumbotron
             displayPhoto(base64Img.target.result);
+            images.push(base64Img.target.result);
+
+            maxPhotos(images.length)
+
         });
         FR.readAsDataURL(this.files[0]);
     }
 };
 
 // display smaller photo icon 
-function retakePhoto(image) {
+function retakePhoto() {
     $('#form-message').empty();
     $('#form-message').append('<i id="upload" class="fas fa-camera fa-3x" for="upload-photo"></i>');
     $('#form-message').append('<input type="file" id="upload-image" style="display: none;" />');
-    maxPhotos(image);
-
 };
 
 // display photo to top of jumbotron
 function displayPhoto(image) {
     $('.camera').empty();
     $('#jumbotron-top').append(`<img src="${image}" alt="image" class="uploaded-images responsive text-center mb-2 remove-img">`);
-    retakePhoto(image);
+    retakePhoto();
 };
 
 // set max photos to 3
-function maxPhotos(image) {
-    images.push(image);
-    if (images.length > 3) {
-        retakePhoto(image);
-    } else if (images.length === 3) {
+function maxPhotos(max) {
+    if (max < 3) {
+        $('#form-message').empty();
+        $('#form-message').append('<i id="upload" class="fas fa-camera fa-3x" for="upload-photo"></i>');
+        $('#form-message').append('<input type="file" id="upload-image" style="display: none;" />');
+    } else if (max === 3) {
         $('#form-message').empty();
         $('#form-message').text('Max photos allowed!');
     }
 };
+
