@@ -21,5 +21,207 @@
 
 </div>
 
+
+{{!-- form --}}
+<div class="container">
+
+    <!-- bootstrap form validation; required questions -->
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
+
+            {{!-- pet info --}}
+            <div class="col-md-12">
+                <label for="a1">Pet type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q1" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Doggo</option>
+                        <option value="2">Gato</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="q2">Breed - js this</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q2" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Theres</option>
+                        <option value="2">a</option>
+                        <option value="3">ton</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="q3">Color - js vs html</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q3" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Brown</option>
+                        <option value="2">Black</option>
+                        <option value="3">Pink</option>
+                        <option value="4">JS this</option>
+                        <option value="5">5 (Strongly Agree)</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="q8">Size</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q8" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Small</option>
+                        <option value="2">Medium</option>
+                        <option value="3">Large</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="q4">Coat Type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q4" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Short-coated (or smooth-coated)</option>
+                        <option value="2">Medium-coated</option>
+                        <option value="3">Long-coated</option>
+                        <option value="4">Wire coated</option>
+                        <option value="5">Curly-coated</option>
+                        <option value="6">Hairless</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <!-- not required questions -->
+            <div class="col-md-12">
+                <label for="q6">Sex</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="q6">
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
+                </div>
+            </div>
+            {{!-- toggle form button --}}
+            <div class="text-center">
+                <button id="form-show" class="btn-outline-info btn-block">It's OK to contact me</button>
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr class="m-3">
+
+        {{!-- toggle show / hide contact --}}
+        <div class="col-md-12" id="toggle-form">
+
+            {{!-- finder contact message --}}
+            <p>We will connect you to the owner if there is a match!</p>
+
+            <!-- finder info; not required -->
+            <div class="form-group col-md-12">
+                <input id="name" type="text" class="form-control" placeholder="Name">
+            </div>
+
+            <div class="form-group col-md-12">
+                <input id="email" type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group col-md-12">
+                <input id="contact" type="text" class="form-control" placeholder="Contact">
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr>
+
+        <div class="text-center">
+            <!-- Link to open the modal and Submit Form -->
+            <button id="submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit" data-toggle="modal"
+                data-target="#exampleModal">
+                Find Me!
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- match modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="match-title">Thank you!</h5>
+            </div>
+
+            <!-- display match in modal -->
+            <div class="modal-body">
+                <p>Where did you find me?</p>
+
+                {{!-- geolocation --}}
+                <button id="find-me" class="btn-outline-info btn-block">Use geolocation</button>
+                <p id="status"></p>
+                <a id="map-link" target="_blank"></a>
+
+                {{!-- manual location --}}
+                <button id="toggle-location" class="btn-outline-dark btn-block">I want to enter the
+                    location manually</button>
+
+                {{!-- manual location form --}}
+                <div class="col-auto mt-3">
+                    <form id="toggle-location-form">
+                        <hr>
+                        <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="submit-finder-contact" type="button" class="btn btn-outline-primary"
+                    data-dismiss="modal">Submit</button>
+
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./scripts/bootstrap.validation.js"></script>
 <script src="./scripts/upload.image.js"></script>
-{{!-- <script src="./scripts/geolocation.js"></script> --}}
+<script src="./scripts/geolocation.js"></script>
+<script src="./scripts/form.js"></script>
