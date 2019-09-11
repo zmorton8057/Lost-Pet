@@ -4,7 +4,7 @@ const apiRoutes = require('./app/routes/api.routes');
 // added pet route require to get newpet.js Eric Malvar
 const petRoute = require('./app/routes/petinfo.js')
 const app = express();
-const exphbs  = require('express-handlebars');
+const hbs  = require('express-handlebars');
 const passportSetup = require('./config/passport-setup'); 
 const cookieSession = require('cookie-session'); 
 const passport = require('passport');
@@ -13,10 +13,17 @@ const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes'); 
 const fileRoute = require('./app/routes/file-upload-route');
 const PORT = process.env.PORT || 3000;
+const knex = require('./app/db/knex'); 
+const shuffle = require('./app/public/js/shuffle'); 
 
+app.set('view engine', 'hbs');
 
-app.engine('handlebars', exphbs());
-app.set('view engine', 'handlebars');
+app.engine('hbs', hbs({
+    extname: 'hbs',
+    defaultView: 'default',
+    layoutsDir: __dirname + '/views/pages/',
+    partialsDir: __dirname + '/views/partials/'
+}));
 
 //use cookie encoder
 app.use(cookieSession({
@@ -37,7 +44,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('home')
+    knex('user_pets')
+        .select()
+        .then((result) => {
+            let randomOrder = shuffle(result)
+            res.render('home', {
+                layout: 'default',
+                template: 'home-template',
+                pet_name: randomOrder[0].pet_name,
+                pet_type: randomOrder[0].pet_type,
+                pet_breed: randomOrder[0].pet_breed,
+                color: randomOrder[0].color,
+                lost_status: randomOrder[0].lost_status
+            });
+        })
 })
 
 app.use('/auth', authRoutes); 
