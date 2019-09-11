@@ -15,6 +15,7 @@ const fileRoute = require('./app/routes/file-upload-route');
 const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex'); 
 const shuffle = require('./app/public/js/shuffle'); 
+const __ = require('lodash'); 
 
 app.set('view engine', 'hbs');
 
@@ -43,19 +44,27 @@ app.use(express.static("./app/public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+
+
+
 app.get('/', (req, res) => {
     knex('user_pets')
         .select()
         .then((result) => {
             let randomOrder = shuffle(result)
-            res.render('home', {
+            let pets = result.map(x => x = {
+                pet_name: x.pet_name, 
+                pet_type: x.pet_type, 
+                pet_breed: x.pet_breed, 
+                color: x.color, 
+                lost_status: x.lost_status
+            }); 
+            console.log(pets)
+            res.render('profile', {
                 layout: 'default',
                 template: 'home-template',
-                pet_name: randomOrder[0].pet_name,
-                pet_type: randomOrder[0].pet_type,
-                pet_breed: randomOrder[0].pet_breed,
-                color: randomOrder[0].color,
-                lost_status: randomOrder[0].lost_status
+                 pets 
             });
         })
 })
