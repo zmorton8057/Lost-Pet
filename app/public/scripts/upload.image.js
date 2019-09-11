@@ -1,6 +1,10 @@
 // author - vn //
 var images = [];
 
+// hide form details on load
+$("#toggle-form").hide();
+$('#toggle-location-form').hide();
+
 // init all buttons
 $(document).ready(function () {
 
@@ -21,6 +25,7 @@ $(document).ready(function () {
             let temp = images.splice(newimages, 1);
         }
 
+        // check max images allowed
         maxPhotos(images.length);
     });
 });
@@ -36,6 +41,7 @@ function readFile() {
             displayPhoto(base64Img.target.result);
             images.push(base64Img.target.result);
 
+            // check if max images allowed
             maxPhotos(images.length)
 
         });
