@@ -42,8 +42,51 @@ var Pet = {
       });
   },
 
-  addLostPet: function(petObj, cb) {
+  addLostPet: function(petArrays, cb) {
+    //info pulled from the req
+    var images = petArrays[0];
+    var formData = petArrays[1];
+    var finderLocation = petArrays[2];
 
+    //obj to be send to the back
+    var finalObj = {
+      pet_image1: "",
+      pet_image2: "",
+      pet_image3: "",
+      pet_type: "",
+      pet_breed: "",
+      color: "",
+      pet_size: "",
+      coat_type: "",
+      sex: "",
+      finder_name: "",
+      finder_phone: "",
+      finder_email: "",
+      last_zip: ""
+    };
+
+    //obj keys array
+    var keys = Object.keys(finalObj);
+
+    //fills the obj with info passed in
+    for (var i = 0; i < 3; i++) {
+      finalObj[keys[i]] = images[i];
+    }
+
+    for (var i = 3; i < keys.length; i++) {
+      finalObj[keys[i]] = formData[i - 3];
+    }
+
+    //add lost pet to Lost_pet
+    knex("lost_pets")
+      .insert(finalObj)
+      .then(function(resp) {
+        console.log("Data Added to DB!" + resp);
+        cb.send(resp);
+      })
+      .catch(function(err) {
+        if (err) throw err;
+      });
   },
 
   //removes a pet
@@ -73,7 +116,7 @@ var Pet = {
     var petColor = pet.color;
     var petCoatType = pet.coat_type;
     var petSize = pet.pet_size;
-    var petZip = pet.pet_zip
+    var petZip = pet.pet_zip;
 
     //grab all pets and compare in .then
     knex
@@ -104,7 +147,7 @@ var Pet = {
             petPointObj.points++;
           }
 
-          if (petPointObj.points === 3  && allPetObjs[i].pet_zip === petZip) {
+          if (petPointObj.points === 3 && allPetObjs[i].pet_zip === petZip) {
             petPointObj.points++;
           }
 
@@ -114,8 +157,10 @@ var Pet = {
 
         //sort Array
         pointsObjArray.sort(function(pet1, pet2) {
-          cb.send(pet1.points > pet2.points);
+          return pet1.points > pet2.points;
         });
+
+        cb.send(pointsObjArray);
       });
   }
 };
