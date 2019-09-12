@@ -48,7 +48,7 @@ function geoFindMe() {
 // function submit form
 $(document).ready(function () {
     $('#submit-location').click(function (event) {
-        var lostPet = [];
+        var lostPet = {};
         event.preventDefault();
 
         // check if user used geolocation
@@ -65,21 +65,20 @@ $(document).ready(function () {
         console.log('--------------------------');
 
         // create array to be pass to the backend
-        lostPet = [
+        lostPet = {
             images,
             formData,
             finderLocation
-        ];
-
+        };
         console.log(`all info passed back: ${lostPet}`)
-        // sendFormDatatoLostPet(lostPet);
+        sendFormDatatoLostPet(lostPet);
     })
 });
 
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
     // POST request to add burger
-    console.log("in form test: " + lostPet);
+    console.log("in form test: " + JSON.stringify(lostPet));
     var route = '/api/addLostPet'
     $.ajax(route, {
         type: 'POST',
