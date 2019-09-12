@@ -1,7 +1,7 @@
 
 
 // var images = [img1, img2, img3]
-
+var formData = [];
 
 function getForm() {
 
