@@ -48,18 +48,15 @@ function geoFindMe() {
 // function submit form
 $(document).ready(function () {
     $('#submit-location').click(function (event) {
-        var lostPet = {};
+        var lostPet = [];
         event.preventDefault();
 
         // check if user used geolocation
         if (useGeolocation) {
             finderLocation.push(longitude, latitude);
         } else if (!useGeolocation) {
-            var inputAddress = $('#inputAddress').val().trim();
-            var inputCity = $('#inputCity').val().trim();
             var inputZip = $('#inputZip').val().trim();
-
-            finderLocation.push(inputAddress, inputCity, inputZip);
+            finderLocation.push(inputZip);
         }
         console.log('--------------------------')
         console.log(`images: ${images.length}`);
@@ -74,7 +71,7 @@ $(document).ready(function () {
             finderLocation
         ];
 
-        console.log(`all info: ${lostPet}`)
+        console.log(`all info passed back: ${lostPet}`)
         // sendFormDatatoLostPet(lostPet);
     })
 });
