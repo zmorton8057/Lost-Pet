@@ -22,6 +22,7 @@ function geoFindMe() {
     mapLink.href = '';
     mapLink.textContent = '';
 
+    // on success, get long and lat
     function success(position) {
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
@@ -35,6 +36,7 @@ function geoFindMe() {
         status.textContent = 'Unable to retrieve your location';
     }
 
+    // check if geolocation is support by browser
     if (!navigator.geolocation) {
         status.textContent = 'Geolocation is not supported by your browser';
     } else {
@@ -49,6 +51,7 @@ $(document).ready(function () {
         var lostPet = {};
         event.preventDefault();
 
+        // check if user used geolocation
         if (useGeolocation) {
             finderLocation.push(longitude, latitude);
         } else if (!useGeolocation) {
@@ -62,25 +65,16 @@ $(document).ready(function () {
         console.log(`images: ${images.length}`);
         console.log(`form data: ${formData}`);
         console.log(`location: ${finderLocation}`);
-        console.log('--------------------------')
+        console.log('--------------------------');
 
-        lostPet = {
-            pet_image1: 'base64-one',
-            pet_image2: 'base64-two',
-            pet_image3: 'base64-three',
-            pet_type: 'dog',
-            pet_breed: 'poodle',
-            color: 'pink',
-            coat_type: 'curly',
-            sex: 'male',
-            pet_size: 'small',
-            last_zip: 10000,
-            finder_name: 'vincent',
-            finder_phone: '714-415-8081',
-            finder_email: 'finder@gmail.com'
-        };
+        // create array to be pass to the backend
+        lostPet = [
+            images,
+            formData,
+            finderLocation
+        ];
 
-        console.log('find.geolocatoin.js | lostpet: ' + JSON.stringify(lostPet))
+        console.log(`all info: ${lostPet}`)
         // sendFormDatatoLostPet(lostPet);
     })
 });

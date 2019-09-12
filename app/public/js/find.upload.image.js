@@ -76,4 +76,3 @@ function maxPhotos(max) {
         $('#form-message').text('Max photos allowed!');
     }
 };
-
