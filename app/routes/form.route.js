@@ -6,9 +6,11 @@ router.get('/find', function (req, res) {
     res.render('find', {
         layout: 'default',
         template: 'home-template'
-        // template: 'home-template',
         //  pets 
     });
 });
 
+// table: lost_pet
+
 module.exports = router;
+

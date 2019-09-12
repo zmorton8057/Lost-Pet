@@ -30,21 +30,26 @@ var Pets = require('../Models/pet');
 // })
 
 //Route to get all pets
-router.get('/api/allPets', function(req, res) {
+router.get('/api/allPets', function (req, res) {
     Pets.getAllPets(res);
 });
 
-router.get('/api/:ownerId', function(req, res) {
+router.get('/api/:ownerId', function (req, res) {
     var ownerId = req.params.ownerId;
 
     Pets.selectAllOwnerPets(ownerId, res);
 });
 
-router.post('/api/addPet', function(req, res) {
+router.post('/api/addPet', function (req, res) {
     console.log(req.body);
 
     Pets.addPet(req.body, res);
 })
 
+router.post('/api/addLostPet', function (req, res) {
+    var formData = req.body;
+    console.log("in  backend route" + formData);
+    Pets.addLostPet(req.body, res);
+});
 
 module.exports = router

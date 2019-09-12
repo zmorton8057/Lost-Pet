@@ -11,7 +11,6 @@ const passport = require('passport');
 require('dotenv').config();
 const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes');
-const fileRoute = require('./app/routes/file-upload-route');
 const formRoutes = require('./app/routes/form.route.js')
 const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex');
@@ -40,7 +39,7 @@ app.use(passport.session());
 app.use(morgan('dev'))
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("./app/public"));
-
+console.log(__dirname)
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,7 +53,7 @@ app.use(apiRoutes);
 app.use(formRoutes);
 
 //route to upload File to S3
-app.use(fileRoute);
+// app.use(fileRoute);
 
 app.get('/', (req, res) => {
     knex('user_pets')

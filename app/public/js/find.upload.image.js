@@ -59,7 +59,7 @@ function retakePhoto() {
 // display photo to top of jumbotron
 function displayPhoto(image) {
     $('.camera').empty();
-    $('#jumbotron-top').append(`<img src="${image}" alt="image" class="uploaded-images responsive text-center mb-2 remove-img">`);
+    $('#jumbotron-top').append(`<div class="col-md-12"><img src="${image}" alt="image" class="uploaded-images responsive mb-2 remove-img">`);
     retakePhoto();
 };
 

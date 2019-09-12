@@ -1,3 +1,4 @@
+var formData = [];
 // initialize form buttons
 $(document).ready(function () {
 
@@ -13,5 +14,4 @@ $(document).ready(function () {
         event.preventDefault();
         $("#toggle-location-form").toggle();
     });
-
 });
