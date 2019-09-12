@@ -41,6 +41,11 @@ var Pet = {
         if (err) throw err;
       });
   },
+
+  addLostPet: function(petObj, cb) {
+
+  },
+
   //removes a pet
   removePet: function(petId, cb) {
     knex("user_pets")
@@ -53,43 +58,22 @@ var Pet = {
         if (err) throw err;
       });
   },
-  addImageToPet: function(petInfo, cb) {
-    var petId = _.pick(petInfo, "pet_id").pet_id;
-    var file = _.pick(petInfo, "file");
-    var image = {
-      image: file.file
-    };
-    console.log(petId);
+  addImageToPet: function(req, res) {
+    var upload = require("../services/upload-file");
+    var sinlgeUpload = upload.single("image");
 
-    //adds file to S3 and adds the link to the DB under the
-    //pet's ID
-    axios
-      .post("/image-upload", image)
-      .then(function(resp) {
-        var imageLink = resp.imageUrl;
+    console.log(req);
 
-        //add the link to the pet entry
-        knex("user_pets")
-          .where("pet_id", petId)
-          .update({
-            pet_image1: imageLink
-          })
-          .then(function(res) {
-            cb.send(res);
-          })
-          .catch(function(err) {
-            if (err) throw err;
-          });
-      })
-      .catch(function(err) {
-        if (err) throw err;
-      });
+    sinlgeUpload(req, res, function(err) {
+      return res.json({ imageUrl: req.file.location });
+    });
   },
   getPetsSimilarTo: function(pet, cb) {
     //elements of pet to compare
     var petColor = pet.color;
     var petCoatType = pet.coat_type;
     var petSize = pet.pet_size;
+    var petZip = pet.pet_zip
 
     //grab all pets and compare in .then
     knex
@@ -117,6 +101,10 @@ var Pet = {
             petPointObj.points++;
           }
           if (allPetObjs[i].color === petSize) {
+            petPointObj.points++;
+          }
+
+          if (petPointObj.points === 3  && allPetObjs[i].pet_zip === petZip) {
             petPointObj.points++;
           }
 

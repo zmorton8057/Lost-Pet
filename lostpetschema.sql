@@ -18,7 +18,6 @@ last_zip int not null,
 finder_name varchar(100),
 finder_phone varchar(100),
 finder_email varchar(100)
-
 );
 
 select * from lost_pets;
