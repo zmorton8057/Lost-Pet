@@ -57,6 +57,49 @@ var Pet = {
       .catch(function (err) {
         if (err) throw err;
       });
+  },
+  getPetsSimilarTo: function (pet, cb) {
+    //elements of pet to compare
+    var petColor = pet.color;
+    var petCoatType = pet.coat_type;
+    var petSize = pet.pet_size;
+    var petZip = pet.pet_zip
+    //grab all pets and compare in .then
+    knex
+      .select()
+      .from("user_pets")
+      .then(function (res) {
+        //array of all pet Objs
+        var allPetObjs = res;
+        //will hold the objects with their points associtaed
+        var pointsObjArray = {};
+        //loop to add points
+        for (var i = 0; i < allPetObjs.length; i++) {
+          //points obj
+          var petPointObj = {
+            pet: allPetObjs[i],
+            points: 0
+          };
+          if (allPetObjs[i].color === petColor) {
+            petPointObj.points++;
+          }
+          if (allPetObjs[i].coat_type === petCoatType) {
+            petPointObj.points++;
+          }
+          if (allPetObjs[i].color === petSize) {
+            petPointObj.points++;
+          }
+          if (petPointObj.points === 3 && allPetObjs[i].pet_zip === petZip) {
+            petPointObj.points++;
+          }
+          //add to Array
+          pointsObjArray.push(petPointObj);
+        } //end for
+        //sort Array
+        pointsObjArray.sort(function (pet1, pet2) {
+          cb.send(pet1.points > pet2.points);
+        });
+      });
   }
 };
 
