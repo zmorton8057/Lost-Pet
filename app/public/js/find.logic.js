@@ -1,4 +1,3 @@
-var formData = [];
 // initialize form buttons
 $(document).ready(function () {
 
@@ -7,7 +6,6 @@ $(document).ready(function () {
         event.preventDefault();
         $("#toggle-form").toggle();
     });
-
 
     // show / hide location form
     $("#toggle-location").click(function (event) {
