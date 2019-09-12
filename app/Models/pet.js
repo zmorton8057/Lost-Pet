@@ -47,17 +47,53 @@ var Pet = {
         if (err) throw err;
       });
   },
-  addLostPet: function (pet_info, cb) {
-    knex("lost_pets")
-      .insert(pet_info)
-      .then(function (response) {
-        console.log("Data Added to DB!" + response);
-        cb.json("Pet Added");
-      })
-      .catch(function (err) {
-        if (err) throw err;
-      });
-  },
+   addLostPet: function(petArrays, cb) {
+        //info pulled from the req
+        var images = petArrays[0];
+        var formData = petArrays[1];
+        var finderLocation = petArrays[2];
+    
+        //obj to be send to the back
+        var finalObj = {
+          pet_image1: "",
+          pet_image2: "",
+          pet_image3: "",
+          pet_type: "",
+          pet_breed: "",
+          color: "",
+          pet_size: "",
+          coat_type: "",
+          sex: "",
+          finder_name: "",
+          finder_phone: "",
+          finder_email: "",
+          last_zip: ""
+        };
+    
+        //obj keys array
+        var keys = Object.keys(finalObj);
+    
+        //fills the obj with info passed in
+        for (var i = 0; i < 3; i++) {
+          finalObj[keys[i]] = images[i];
+        }
+    
+        for (var i = 3; i < keys.length; i++) {
+          finalObj[keys[i]] = formData[i - 3];
+        }
+    
+        //add lost pet to Lost_pet
+        knex("lost_pets")
+          .insert(finalObj)
+          .then(function(resp) {
+            console.log("Data Added to DB!" + resp);
+            cb.send(resp);
+          })
+          .catch(function(err) {
+            if (err) throw err;
+          });
+      },
+    
   getPetsSimilarTo: function (pet, cb) {
     //elements of pet to compare
     var petColor = pet.color;
