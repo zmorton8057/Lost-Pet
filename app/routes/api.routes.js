@@ -52,4 +52,7 @@ router.post('/api/addLostPet', function (req, res) {
     Pets.addLostPet(req.body, res);
 });
 
+router.get('/api/compare', function (req, res) {
+    Pets.getPetsSimilarTo(req.body, res);
+})
 module.exports = router

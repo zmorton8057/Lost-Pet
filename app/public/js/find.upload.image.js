@@ -24,6 +24,7 @@ $(document).ready(function () {
         if (newimages > -1) {
             let temp = images.splice(newimages, 1);
         }
+        console.log(`images: ${images}`);
 
         // check max images allowed
         maxPhotos(images.length);
@@ -40,9 +41,10 @@ function readFile() {
             // pass base64 image to be uploaded to jumbotron
             displayPhoto(base64Img.target.result);
             images.push(base64Img.target.result);
+            console.log(`images: ${images}`);
 
             // check if max images allowed
-            maxPhotos(images.length)
+            maxPhotos(images.length);
 
         });
         FR.readAsDataURL(this.files[0]);
