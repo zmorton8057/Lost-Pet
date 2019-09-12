@@ -1,0 +1,223 @@
+{{!-- author - vn --}}
+<div class="jumbotron">
+
+    <div id="jumbotron-top" class="text-center"></div>
+
+    {{!-- fontawesome camera; upload file or file --}}
+    <div class="camera text-center">
+        <i id="upload" class="fas fa-camera fa-8x" for="upload-photo"></i>
+        <input type="file" id="upload-image" />
+    </div>
+
+    <hr>
+
+    {{!-- bottom section of jumbotron --}}
+    <div id="jumbotron-bottom"></div>
+
+    {{!-- form message --}}
+    <p id="form-message">
+        Upload a picture! Provide as much info as possible! This will help locate my owner faster!
+    </p>
+
+</div>
+
+
+{{!-- form --}}
+<div class="container">
+
+    <!-- bootstrap form validation; required questions -->
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
+
+            {{!-- pet info --}}
+            <div class="col-md-12">
+                <label for="pet-type">Pet type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="pet-type" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="breed">Breed</label>
+                <div class="form-group">
+                    <input id="breed" type="text" class="form-control" placeholder="Enter pet breed" required>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="color">Color - js vs html</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="color" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="1">Brown</option>
+                        <option value="2">Black</option>
+                        <option value="3">Pink</option>
+                        <option value="4">JS this</option>
+                        <option value="5">5 (Strongly Agree)</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="size">Size</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="size" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="sm">Small</option>
+                        <option value="md">Medium</option>
+                        <option value="lg">Large</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="coat-type">Coat Type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="coat-type" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="short">Short-coated (or smooth-coated)</option>
+                        <option value="medium">Medium-coated</option>
+                        <option value="long">Long-coated</option>
+                        <option value="wire">Wire coated</option>
+                        <option value="curly">Curly-coated</option>
+                        <option value="hairless">Hairless</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <!-- not required questions -->
+            <div class="col-md-12">
+                <label for="sex">Sex</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="sex">
+                        <option value="" selected disabled>Please select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+            {{!-- toggle form button --}}
+            <div class="text-center">
+                <button id="form-show" class="btn-outline-info btn-block">It's OK to contact me</button>
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr class="m-3">
+
+        {{!-- toggle show / hide contact --}}
+        <div class="col-md-12" id="toggle-form">
+
+            {{!-- finder contact message --}}
+            <p>We will connect you to the owner if there is a match!</p>
+
+            <!-- finder info; not required -->
+            <div class="form-group col-md-12">
+                <input id="finder-name" type="text" class="form-control" placeholder="Your name">
+            </div>
+
+            <div class="form-group col-md-12">
+                <input id="finder-email" type="text" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group col-md-12">
+                <input id="finder-contact" type="text" class="form-control" placeholder="Contact">
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr>
+
+        <div class="text-center">
+            <!-- Link to open the modal and Submit Form -->
+            <button id="submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit" data-toggle="modal"
+                data-target="#location-modal">
+                Find Me!
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- match modal -->
+<div class="modal fade" id="location-modal" tabindex="-1" role="dialog" aria-labelledby="location-modal-label"
+    aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="match-title">Thank you!</h5>
+            </div>
+
+            <!-- display match in modal -->
+            <div class="modal-body">
+                <p>Great! Where did you find me?</p>
+
+                {{!-- geolocation --}}
+                <button id="find-me" class="btn-outline-info btn-block">Use geolocation</button>
+                <p id="status"></p>
+                <a id="map-link" target="_blank"></a>
+
+                {{!-- manual location --}}
+                <button id="toggle-location" class="btn-outline-dark btn-block">I want to enter the
+                    location manually</button>
+
+                {{!-- manual location form --}}
+                <div class="col-auto mt-3">
+                    <form id="toggle-location-form">
+                        <hr>
+                        <div class="form-group">
+                            <label for="inputAddress">Address</label>
+                            <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputZip">Zip</label>
+                                <input type="text" class="form-control" id="inputZip">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button id="submit-location" type="button" class="btn btn-outline-info"
+                    data-dismiss="modal">Submit</button>
+
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- form js --}}
+<script src="./js/find.bootstrap.validation.js"></script>
+<script src="./js/find.upload.image.js"></script>
+<script src="./js/find.geolocation.js"></script>
+<script src="./js/find.logic.js"></script>
