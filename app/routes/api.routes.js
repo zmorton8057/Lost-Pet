@@ -22,12 +22,10 @@ router.post('/api/addPet', function (req, res) {
 
 router.post('/api/addLostPet', function (req, res) {
     var formData = req.body;
-    console.log("in  backend route" + formData);
     Pets.addLostPet(req.body, res);
 });
 
 router.post('/api/compare', function (req, res) {
-    console.log("compare bod: " + req.body);
     Pets.getPetsSimilarTo(req.body, res);
 })
 module.exports = router

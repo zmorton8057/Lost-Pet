@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex');
 const shuffle = require('./app/public/js/shuffle');
 const __ = require('lodash');
+var fileUpload = require('./app/routes/file-upload-route');
 
 app.set('view engine', 'hbs');
 
@@ -47,6 +48,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use(apiRoutes);
+app.use(fileUpload);
 
 // use form routes
 // app.use(petRoute);

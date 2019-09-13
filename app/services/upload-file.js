@@ -23,15 +23,14 @@ var s3 = new aws.S3()
 var upload = multer({
   storage: multerS3({
     s3: s3,
-    bucket: 'middle-uci-bucket',
+    bucket: 'pets-image-bucket',
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: 'TESTING_META_DATA'});
     },
     key: function (req, file, cb) {
-      cb(null, 'Test')
+      cb(null, Date.now().toString())
     }
   })
 })
- 
 module.exports = upload
