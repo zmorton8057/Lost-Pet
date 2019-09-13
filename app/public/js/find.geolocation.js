@@ -78,9 +78,9 @@ $(document).ready(function() {
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
   var currentImages = lostPet["images"];
-  console.log("ere ibs the back: " + currentImages);
+    console.log('ere ibs the back: ' + images);
   var formData = new FormData();
-  formData.append("image", images[0]);
+  formData.append("image", currentImages[0]);
   //add petPictures
   axios({
     method: "POST",
@@ -90,7 +90,8 @@ function sendFormDatatoLostPet(lostPet) {
   })
     .then(function(response) {
       //handle success
-      lostPet["images"][0] = response.data.url;
+      console.log("hello", response.data.url);
+        lostPet.images[0] = response.data.url;
       // POST request to add burger
       var route = "/api/addLostPet";
       $.ajax(route, {
