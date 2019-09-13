@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
-    // POST request to add burger
+
     console.log("in form test: " + JSON.stringify(lostPet));
     var route = '/api/addLostPet'
     $.ajax(route, {

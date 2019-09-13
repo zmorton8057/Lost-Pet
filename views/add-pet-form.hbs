@@ -1,0 +1,163 @@
+{{!-- author - vn --}}
+<div class="jumbotron">
+
+    <div id="add-pet-jumbotron-top" class="text-center"></div>
+
+    {{!-- fontawesome camera; upload file or file --}}
+    <div class="add-pet-camera text-center">
+        <i id="add-pet-upload" class="fas fa-camera fa-8x" for="add-pet-upload-photo"></i>
+        <input type="file" id="add-pet-upload-image" />
+    </div>
+
+    <hr>
+
+    {{!-- form message --}}
+    <p id="add-pet-form-message">
+        Upload up to 3 photos of your pet!
+    </p>
+
+</div>
+
+
+{{!-- form --}}
+<div class="container mb-3">
+
+    <!-- bootstrap form validation; required questions -->
+    <form class="needs-validation" novalidate>
+        <div class="form-row">
+
+            {{!-- pet info --}}
+            <div class="col-md-12">
+                <label for="add-pet-name">Name</label>
+                <div class="form-group">
+                    <input id="add-pet-name" type="text" class="form-control" placeholder="Enter pet name" required>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="add-pet-pet-type">Pet type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="add-pet-pet-type" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="add-pet-breed">Breed</label>
+                <div class="form-group">
+                    <input id="add-pet-breed" type="text" class="form-control" placeholder="Enter pet breed" required>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="add-pet-color">Color (Choose most dominant color)</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="add-pet-color" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="white">White</option>
+                        <option value="black">Black</option>
+                        <option value="brown">Brown</option>
+                        <option value="blue">Blue</option>
+                        <option value="golden">Golden</option>
+                        <option value="orange">Orange</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="add-pet-size">Size</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="add-pet-size" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="sm">Small</option>
+                        <option value="md">Medium</option>
+                        <option value="lg">Large</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for="add-pet-coat-type">Coat Type</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="add-pet-coat-type" required>
+                        <option value="" selected disabled>Please select</option>
+                        <option value="short">Short (or smooth-coated)</option>
+                        <option value="medium">Medium</option>
+                        <option value="long">Long</option>
+                        <option value="wire">Wire</option>
+                        <option value="curly">Curly</option>
+                        <option value="spotted">Spotted</option>
+                        <option value="hairless">Hairless</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Me too!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <!-- not required questions -->
+            <div class="col-md-12">
+                <label for="add-pet-sex">Sex</label>
+                <div class="form-group">
+                    <select class="form-control empty" id="add-pet-sex">
+                        <option value="" selected disabled>Please select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <label for="add-pet-age">Age</label>
+                <div class="form-group">
+                    <input id="add-pet-age" type="text" class="form-control" placeholder="Enter pet age" >
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="add-pet-inputZip">Zip code</label>
+                <input type="text" class="form-control" id="add-pet-inputZip" placeholder="ex. 90210">
+            </div>
+        </div>
+
+        {{!-- line --}}
+        <hr class="m-3">
+
+        {{!-- line --}}
+        <hr>
+
+        <div class="text-center">
+            <!-- Link to open the modal and Submit Form -->
+            <button id="add-pet-submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit">
+                Add me!
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- match modal -->
+
+{{!-- form js --}}
+<script src="/js/add-pet.bootstrap.validation.js"></script>
+<script src="/js/add-pet.upload.image.js"></script>
+<script src="/js/addpet.logic.js"></script>

@@ -1,0 +1,1 @@
+$('#add-pet-upload-image').hide();

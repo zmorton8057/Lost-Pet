@@ -1,5 +1,6 @@
 body {
-    background: #D4DEEA
+    background: #D4DEEA; 
+    font-family: 'Raleway', sans-serif; 
 }
 
 .navbar-brand {
@@ -69,3 +70,19 @@ a {
 .maxWidth {
     max-width: 10rem;
 }; 
+
+#red-button {
+    font-weight: bold; 
+    background: red; 
+    color: white
+}
+
+#header-nav-container {
+    max-width: 100%
+}
+
+.report-button {
+    font-weight: bold; 
+    background: red; 
+    color: white
+}

@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex');
 const shuffle = require('./app/public/js/shuffle');
 const __ = require('lodash');
+const profileRoutes = require('./app/routes/profile-routes'); 
 
 app.set('view engine', 'hbs');
 
@@ -41,41 +42,46 @@ app.use(morgan('dev'))
 app.use(express.static("./app/public"));
 console.log(__dirname)
 // Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.json());
 
 
 app.use('/auth', authRoutes);
 app.use(apiRoutes);
+app.use('/profile', profileRoutes.router)
 
 // use form routes
-// app.use(petRoute);
-app.use(formRoutes);
+app.use('/find', formRoutes);
 
 //route to upload File to S3
 // app.use(fileRoute);
 
 app.get('/', (req, res) => {
-    knex('user_pets')
-        .select()
+    knex('user_pets').where('lost_status', true)
         .then((result) => {
-            let randomOrder = shuffle(result)
+            console.log(result)
             let pets = result.map(x => x = {
-                pet_name: x.pet_name,
+                pet_name: profileRoutes.titleCase(x.pet_name),
                 pet_type: x.pet_type,
                 pet_breed: x.pet_breed,
                 color: x.color,
-                lost_status: x.lost_status
+                lost_status: x.lost_status, 
+                pet_image1: x.pet_image1, 
+                pet_image2: x.pet_image2, 
             });
-            console.log(pets)
-            res.render('profile', {
-                layout: 'default',
-                template: 'home-template'
-                // template: 'home-template',
-                //  pets 
-            });
+            console.log(pets.pet_image1)
+            return pets
         })
-})
+        .then((result) => {
+            res.render('home', {
+                layout: 'default',
+                template: 'home-template',
+                pets: result
+            });
+        }).catch(err => console.log(err)); 
+});
 
 
 app.listen(PORT, function () {

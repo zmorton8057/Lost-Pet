@@ -1,0 +1,27 @@
+    <div class="container  animated fadeIn slow" id="cardContainer border border-secondary">
+        <div class="row d-flex justify-content-center">
+            {{#each result}}
+            <div class="card" style="width: 18rem;">
+                {{#if pet_image1}}
+                <img class="img-fluid border border-light p-1" style="background: white" src="{{pet_image1}}">
+                {{else}}
+                <img class="img-fluid border border-light p-1" style="background: white"
+                    src="/images/default-image.jpg">
+                {{/if}}
+                <div class="card-body">
+                    <h5 class="card-title">{{pet_name}}</h5>
+                    <p class="card-text">Pet Breed: {{pet_breed}}</p>
+                    <p class="card-text">Color: {{pet_color}}</p>
+                    <p class="card-text">Age: {{pet_age}}</p>
+                    <p class="card-text">Coat: {{pet_coat}}</p>
+                    <p class="card-text">Sex: {{pet_sex}}</p>
+                    <p class="card-text">Lost Status: {{lost_status}}</p>
+                    <a href="#" class="btn btn-primary mb-3">Delete</a>
+                    <a href="#" class="btn btn-primary mb-3">Update</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+</div>
