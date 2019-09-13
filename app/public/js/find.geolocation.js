@@ -6,89 +6,184 @@ var longitude;
 
 // when browser loads, check if geolocation is available on device
 if ("geolocation" in navigator) {
-    /* geolocation is available */
-    console.log('geolocation available on this device');
+  /* geolocation is available */
+  console.log("geolocation available on this device");
 } else {
-    /* geolocation IS NOT available */
-    console.log('geolocation NOT available on this device');
+  /* geolocation IS NOT available */
+  console.log("geolocation NOT available on this device");
 }
 
 // execute when user selects geolocation method
 function geoFindMe() {
+  const status = document.querySelector("#status");
+  const mapLink = document.querySelector("#map-link");
 
-    const status = document.querySelector('#status');
-    const mapLink = document.querySelector('#map-link');
+  mapLink.href = "";
+  mapLink.textContent = "";
 
-    mapLink.href = '';
-    mapLink.textContent = '';
+  // on success, get long and lat
+  function success(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    useGeolocation = true;
+    status.textContent = "";
+    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  }
 
-    // on success, get long and lat
-    function success(position) {
-        latitude = position.coords.latitude;
-        longitude = position.coords.longitude;
-        useGeolocation = true;
-        status.textContent = '';
-        mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-        mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-    }
+  function error() {
+    status.textContent = "Unable to retrieve your location";
+  }
 
-    function error() {
-        status.textContent = 'Unable to retrieve your location';
-    }
-
-    // check if geolocation is support by browser
-    if (!navigator.geolocation) {
-        status.textContent = 'Geolocation is not supported by your browser';
-    } else {
-        status.textContent = 'Locating…';
-        navigator.geolocation.getCurrentPosition(success, error);
-    }
-};
+  // check if geolocation is support by browser
+  if (!navigator.geolocation) {
+    status.textContent = "Geolocation is not supported by your browser";
+  } else {
+    status.textContent = "Locating…";
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+}
 
 // function submit form
-$(document).ready(function () {
-    $('#submit-location').click(function (event) {
-        var lostPet = {};
-        event.preventDefault();
+$(document).ready(function() {
+  $("#submit-location").click(function(event) {
+    var lostPet = {};
+    event.preventDefault();
 
-        // check if user used geolocation
-        if (useGeolocation) {
-            finderLocation.push(longitude, latitude);
-        } else if (!useGeolocation) {
-            var inputZip = $('#inputZip').val().trim();
-            finderLocation.push(inputZip);
-        }
-        console.log('--------------------------')
-        console.log(`images: ${images.length}`);
-        console.log(`form data: ${formData}`);
-        console.log(`location: ${finderLocation}`);
-        console.log('--------------------------');
+    // check if user used geolocation
+    if (useGeolocation) {
+      finderLocation.push(longitude, latitude);
+    } else if (!useGeolocation) {
+      var inputZip = $("#inputZip")
+        .val()
+        .trim();
+      finderLocation.push(inputZip);
+    }
+    console.log("--------------------------");
+    console.log(`images: ${images.length}`);
+    console.log(`form data: ${formData}`);
+    console.log(`location: ${finderLocation}`);
+    console.log("--------------------------");
 
-        // create array to be pass to the backend
-        lostPet = {
-            images,
-            formData,
-            finderLocation
-        };
-        console.log(`all info passed back: ${lostPet}`)
-        sendFormDatatoLostPet(lostPet);
-    })
+    // create array to be pass to the backend
+    lostPet = {
+      images: images,
+      formData,
+      finderLocation
+    };
+    sendFormDatatoLostPet(lostPet);
+  });
 });
 
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
-    // POST request to add burger
-    console.log("in form test: " + JSON.stringify(lostPet));
-    var route = '/api/addLostPet'
-    $.ajax(route, {
-        type: 'POST',
-        data: lostPet
-    }).then((response) => {
-        console.log(`POST: ${response}`);
-    }).catch(function (err) {
-        if (err) throw err;
+  var currentImages = lostPet["images"];
+  console.log("ere ibs the back: " + images);
+  var formData = new FormData();
+  formData.append("image", currentImages[0]);
+  //add petPictures
+  axios({
+    method: "POST",
+    url: "/api/upload",
+    data: formData,
+    config: { headers: { "Content-Type": "multipart/form-data" } }
+  })
+    .then(function(response) {
+      console.log("This legnth of img " + currentImages.length);
+      //handle success
+      console.log("hello", response.data.url);
+      lostPet.images[0] = response.data.url;
+
+      if (currentImages.length > 1) {
+        var formData = new FormData();
+        formData.append("image", currentImages[1]);
+        axios({
+          method: "POST",
+          url: "/api/upload",
+          data: formData,
+          config: { headers: { "Content-Type": "multipart/form-data" } }
+        }).then(function(res2) {
+            lostPet.images[1] = res2.data.url;
+
+          if (currentImages.length > 2) {
+            var formData2 = new FormData();
+            formData2.append("image", currentImages[2]);
+            console.log('The current Images are' + currentImages)
+            axios({
+              method: "POST",
+              url: "/api/upload",
+              data: formData2,
+              config: { headers: { "Content-Type": "multipart/form-data" } }
+            }).then(function(res3) {
+              lostPet.images[2] = res3.data.url;
+              // POST request to add burger
+              var route = "/api/addLostPet";
+              $.ajax(route, {
+                type: "POST",
+                data: lostPet
+              })
+                .then(function(respsonse) {
+                  callComparePet(lostPet);
+                })
+                .catch(function(err) {
+                  if (err) throw err;
+                });
+            });
+          } else {
+            lostPet.images[1] = res2.data.url;
+            // POST request to add burger
+            var route = "/api/addLostPet";
+            $.ajax(route, {
+              type: "POST",
+              data: lostPet
+            })
+              .then(function(respsonse) {
+                callComparePet(lostPet);
+              })
+              .catch(function(err) {
+                if (err) throw err;
+              });
+          }
+        });
+      } else {
+        // POST request to add burger
+        var route = "/api/addLostPet";
+        $.ajax(route, {
+          type: "POST",
+          data: lostPet
+        })
+          .then(function(respsonse) {
+            callComparePet(lostPet);
+          })
+          .catch(function(err) {
+            if (err) throw err;
+          });
+      }
     })
-};
+    .catch(function(response) {
+      //handle error
+      console.log(response);
+    });
+}
+
+function callComparePet(pet) {
+  $.ajax("/api/compare", {
+    type: "POST",
+    data: pet
+  }).then(function(res) {
+    console.log(`POST: ${res}`);
+  });
+}
+
+function addPetInfoToDisplay(listOfComparedPets) {
+  //show  modal
+  $("#compareModal").modal("show");
+
+  //fill the modal from all the available pets
+  for (var i = 0; i < listOfComparedPets.length; i++) {
+    var firstPetObj = listOfComparedPets[i].pet;
+  }
+}
 
 // when user presses geolocation
-document.querySelector('#find-me').addEventListener('click', geoFindMe);
+document.querySelector("#find-me").addEventListener("click", geoFindMe);

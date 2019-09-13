@@ -36,13 +36,16 @@ function readFile() {
     if (this.files && this.files[0]) {
 
         var FR = new FileReader();
+        console.log(document.getElementById("upload-image").files[0]);
+        var image = document.getElementById("upload-image").files[0]
+
         FR.addEventListener('load', function (base64Img) {
+            console.log(base64Img.target);
+
 
             // pass base64 image to be uploaded to jumbotron
             displayPhoto(base64Img.target.result);
-            images.push(base64Img.target.result);
-            console.log(`images: ${images}`);
-
+            images.push(image);
             // check if max images allowed
             maxPhotos(images.length);
 
