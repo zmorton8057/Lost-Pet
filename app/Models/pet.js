@@ -53,6 +53,8 @@ var Pet = {
     var images = petArrays["images"];
     var formData = petArrays['formData'];
     var finderLocation = petArrays['finderLocation'];
+    formData.push(123);
+
     console.log(images, formData, finderLocation);
     //obj to be send to the back
     var finalObj = {
@@ -66,14 +68,14 @@ var Pet = {
       coat_type: "",
       sex: "",
       finder_name: "",
-      finder_phone: "",
       finder_email: "",
-      last_zip: ""
+      finder_phone: "",
+      last_zip: 90281
     };
 
     //obj keys array
     var keys = Object.keys(finalObj);
-
+    console.log('FUNC KEYS: ' + keys)
     //fills the obj with info passed in
     for (var i = 0; i < 3; i++) {
       finalObj[keys[i]] = images[i];
@@ -83,12 +85,13 @@ var Pet = {
       finalObj[keys[i]] = formData[i - 3];
     }
 
+    console.log("In the addLostFunc BOdy: " + JSON.stringify(finalObj));
     //add lost pet to Lost_pet
     knex("lost_pets")
       .insert(finalObj)
       .then(function (resp) {
         console.log("Data Added to DB!" + resp);
-        cb.send(resp);
+        cb.json(resp);
       })
       .catch(function (err) {
         if (err) throw err;
@@ -96,11 +99,13 @@ var Pet = {
   },
 
   getPetsSimilarTo: function (pet, cb) {
+
+    var formData = pet["formData"];
     //elements of pet to compare
-    var petColor = pet.color;
-    var petCoatType = pet.coat_type;
-    var petSize = pet.pet_size;
-    var petZip = pet.pet_zip
+    var petColor = formData[2];
+    var petCoatType = formData[4];
+    var petSize = formData[3];
+    var petZip = 12342
     //grab all pets and compare in .then
     knex
       .select()
@@ -109,7 +114,7 @@ var Pet = {
         //array of all pet Objs
         var allPetObjs = res;
         //will hold the objects with their points associtaed
-        var pointsObjArray = {};
+        var pointsObjArray = [];
         //loop to add points
         for (var i = 0; i < allPetObjs.length; i++) {
           //points obj
@@ -134,8 +139,9 @@ var Pet = {
         } //end for
         //sort Array
         pointsObjArray.sort(function (pet1, pet2) {
-          cb.send(pet1.points > pet2.points);
+          return pet1.points > pet2.points;
         });
+        // cb.json(JSON.stringify(pointsObjArray));
       });
   }
 };

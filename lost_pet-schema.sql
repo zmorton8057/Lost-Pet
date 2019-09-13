@@ -17,7 +17,6 @@ CREATE TABLE lost_pets
     finder_name varchar(100),
     finder_phone varchar(100),
     finder_email varchar(100)
-
 );
 
 

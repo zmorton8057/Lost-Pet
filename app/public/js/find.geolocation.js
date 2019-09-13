@@ -66,11 +66,10 @@ $(document).ready(function () {
 
         // create array to be pass to the backend
         lostPet = {
-            images,
+            images: ['some IMG', 'another IMg', "hey look another IMG😭"],
             formData,
             finderLocation
         };
-        console.log(`all info passed back: ${lostPet}`)
         sendFormDatatoLostPet(lostPet);
     })
 });
@@ -78,17 +77,26 @@ $(document).ready(function () {
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
     // POST request to add burger
-    console.log("in form test: " + JSON.stringify(lostPet));
     var route = '/api/addLostPet'
     $.ajax(route, {
         type: 'POST',
         data: lostPet
-    }).then((response) => {
-        console.log(`POST: ${response}`);
+    }).then(function(respsonse){
+        callComparePet(lostPet);
     }).catch(function (err) {
         if (err) throw err;
     })
 };
+
+function callComparePet(pet) {
+    $.ajax('/api/compare', {
+        type: 'POST',
+        data: pet
+    })
+    .then(function(res) {
+        console.log(`POST: ${res}`);
+    })
+}
 
 // when user presses geolocation
 document.querySelector('#find-me').addEventListener('click', geoFindMe);
