@@ -207,13 +207,13 @@
 }
 
 .card.hovercard .avatar img {
-    width: 160px;
-    height: 160px;
-    max-width: 160px;
-    max-height: 160px;
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
-    border-radius: 50%;
+    border-radius: 55%;
     border: 5px solid rgba(255,255,255,0.5);
 }
 
@@ -242,4 +242,3 @@
     margin-bottom: 17px;
 }
 
-/* .btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  } */

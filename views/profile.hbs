@@ -1,33 +1,19 @@
 <div class="container">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <div class="container  animated fadeIn slow" id="cardContainer border border-secondary">
-        <div class="row d-flex justify-content-center">
-            <div class="card-carousel " >
-                {{#each pets}}
-                    <div class="my-card col-3 card hovercard ">
-                        <div class="cardheader border border-secondary p-4 " id="frame">
-                            <img class="img-fluid border border-light p-1" style="background: white"
-                                src="/images/Cute-puppy-pictures-science-why-adorable-puppies-1355345.jpg" ;>
-                        </div>
-                        <div class="avatar">
-                            <img alt="" src="/images/1.jpg" class="img-fluid ">
-                        </div>
-                        <div class="info">
-                            <div class="title">
-                                <a target="_blank" style="color: grey" href="/">{{pet_name}}</a>
-                            </div>
-                            <div class="desc">Pet type: {{pet_type}}</div>
-                            <div class="desc">Pet Breed: {{pet_breed}}</div>
-                            <div class="desc">Color: {{color}}</div>
-                            <div class="desc">Lost status: {{lost_status}}</div>
-                        </div>
-                        <div class="bottom p-1">
-                            <a class="btn btn-light border border-dark " href='/'>Click here to see my
-                                profile</a>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-            </div>
+    <div class="row">
+        <div class="col-6 d-flex justify-content-end ">
+            {{#if user_image1}}
+            <img alt="Profile Picture" src="{{user_image1}}" class="img-fluid mt-4  border border-dark" id="profile-image">
+            {{else}}
+            <img alt="Profile Picture" src="/images/1.jpg" class="img-fluid mt-4" id="profile-image">
+            {{/if}}
+        </div>
+        <div class="col-5 mt-5 ml-0 justify-content-left">
+            <p id="user-name" class="mb-0 mt-0 ml-0 font-weight-bold">{{user_name}}</p>
+            <ul class="font-weight-bold">
+                <li>Pet owner in {{user_location}}</li>
+                <li>Pets found: {{user_petsFound}}</li>
+                <li>Bio: {{user_bio}}</li>
+            </ul>
         </div>
     </div>
+</div>

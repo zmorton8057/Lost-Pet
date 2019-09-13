@@ -2,7 +2,7 @@ drop table if exists lost_pets;
 
 CREATE TABLE lost_pets
 (
-    pet_id SERIAL,
+    pet_id SERIAL PRIMARY KEY,
     pet_image1 varchar(1040),
     pet_image2 varchar(1040),
     pet_image3 varchar(1040),
@@ -17,9 +17,7 @@ CREATE TABLE lost_pets
     finder_name varchar(100),
     finder_phone varchar(100),
     finder_email varchar(100)
-
 );
-
 
 insert into lost_pets
     (

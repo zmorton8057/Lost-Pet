@@ -9,37 +9,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Gayathri&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gayathri&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fade76b3fe.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/style/carousel.css" type="text/css">
     <link rel="stylesheet" href="/style/animate.css" type="text/css">
-    <link rel="stylesheet" href="/style/card.css" type="text/css">
+    {{!-- <link rel="stylesheet" href="/style/card.css" type="text/css"> --}}
     <link rel="stylesheet" href="/style/style.css" type="text/css">
-    {{!-- form css --}}
-    <link rel="stylesheet" href="./style/form.style.css">
-    {{!-- camera icon fontawesome --}}
-    <script src="https://kit.fontawesome.com/fade76b3fe.js"></script>
-    {{!-- font awesome cdn --}}
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-    {{!-- ajax cdn --}}
-    {{!-- jquery --}}
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="/style/profile-button.css" type="text/css">
+    <link rel="stylesheet" href="/style/profile.css" type="text/css">
 </head>
 <body class="{{template}}">
-    <div class="bg">
-        {{> header}}
 
+    {{> profile-header}}
+
+    <div class="bg" >
 
         {{{body}}}
 
-
+        {{> profile-buttons}}
 
         {{> footer}}
     </div>
-
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.2.0/handlebars.js"
         integrity="sha256-R6LDyJ4OTrnBSHsPTKmDdnfJEwJSiF4dx5pKkUzYykw=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

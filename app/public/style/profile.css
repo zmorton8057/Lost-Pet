@@ -1,0 +1,31 @@
+body {
+    font-family: 'Raleway', sans-serif; 
+}
+
+#profile-image {
+    width: 300px;
+    height: 300px;
+    object-fit: fill;
+    border-radius: 50%;
+}
+
+#user-name {
+    color: rgb(107, 153, 209);
+    font-size: 50px; 
+    font-family: 'Raleway', sans-serif; 
+}
+
+#home-header-appName {
+    font-size: 45px; 
+    font-family: 'Raleway', sans-serif; 
+}
+
+#nav-bar-container {
+    max-width: 100%
+}
+
+.report-button {
+    font-weight: bold; 
+    background: red; 
+    color: white
+}
