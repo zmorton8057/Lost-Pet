@@ -78,7 +78,7 @@ $(document).ready(function() {
 // pass all form data to the back /api/lostPet
 function sendFormDatatoLostPet(lostPet) {
   var currentImages = lostPet["images"];
-    console.log('ere ibs the back: ' + images);
+  console.log("ere ibs the back: " + images);
   var formData = new FormData();
   formData.append("image", currentImages[0]);
   //add petPictures
@@ -89,21 +89,76 @@ function sendFormDatatoLostPet(lostPet) {
     config: { headers: { "Content-Type": "multipart/form-data" } }
   })
     .then(function(response) {
+      console.log("This legnth of img " + currentImages.length);
       //handle success
       console.log("hello", response.data.url);
-        lostPet.images[0] = response.data.url;
-      // POST request to add burger
-      var route = "/api/addLostPet";
-      $.ajax(route, {
-        type: "POST",
-        data: lostPet
-      })
-        .then(function(respsonse) {
-          callComparePet(lostPet);
-        })
-        .catch(function(err) {
-          if (err) throw err;
+      lostPet.images[0] = response.data.url;
+
+      if (currentImages.length > 1) {
+        var formData = new FormData();
+        formData.append("image", currentImages[1]);
+        axios({
+          method: "POST",
+          url: "/api/upload",
+          data: formData,
+          config: { headers: { "Content-Type": "multipart/form-data" } }
+        }).then(function(res2) {
+            lostPet.images[1] = res2.data.url;
+
+          if (currentImages.length > 2) {
+            var formData2 = new FormData();
+            formData2.append("image", currentImages[2]);
+            console.log('The current Images are' + currentImages)
+            axios({
+              method: "POST",
+              url: "/api/upload",
+              data: formData2,
+              config: { headers: { "Content-Type": "multipart/form-data" } }
+            }).then(function(res3) {
+              lostPet.images[2] = res3.data.url;
+              // POST request to add burger
+              var route = "/api/addLostPet";
+              $.ajax(route, {
+                type: "POST",
+                data: lostPet
+              })
+                .then(function(respsonse) {
+                  callComparePet(lostPet);
+                })
+                .catch(function(err) {
+                  if (err) throw err;
+                });
+            });
+          } else {
+            lostPet.images[1] = res2.data.url;
+            // POST request to add burger
+            var route = "/api/addLostPet";
+            $.ajax(route, {
+              type: "POST",
+              data: lostPet
+            })
+              .then(function(respsonse) {
+                callComparePet(lostPet);
+              })
+              .catch(function(err) {
+                if (err) throw err;
+              });
+          }
         });
+      } else {
+        // POST request to add burger
+        var route = "/api/addLostPet";
+        $.ajax(route, {
+          type: "POST",
+          data: lostPet
+        })
+          .then(function(respsonse) {
+            callComparePet(lostPet);
+          })
+          .catch(function(err) {
+            if (err) throw err;
+          });
+      }
     })
     .catch(function(response) {
       //handle error
