@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex');
 const shuffle = require('./app/public/js/shuffle');
 const __ = require('lodash');
-const profileRoutes = require('./app/routes/profile-routes'); 
+const profileRoutes = require('./app/routes/profile-routes');
 
 app.set('view engine', 'hbs');
 
@@ -53,7 +53,7 @@ app.use(apiRoutes);
 app.use('/profile', profileRoutes.router)
 
 // use form routes
-app.use('/find', formRoutes);
+app.use(formRoutes);
 
 //route to upload File to S3
 // app.use(fileRoute);
@@ -67,9 +67,9 @@ app.get('/', (req, res) => {
                 pet_type: x.pet_type,
                 pet_breed: x.pet_breed,
                 color: x.color,
-                lost_status: x.lost_status, 
-                pet_image1: x.pet_image1, 
-                pet_image2: x.pet_image2, 
+                lost_status: x.lost_status,
+                pet_image1: x.pet_image1,
+                pet_image2: x.pet_image2,
             });
             console.log(pets.pet_image1)
             return pets
@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
                 template: 'home-template',
                 pets: result
             });
-        }).catch(err => console.log(err)); 
+        }).catch(err => console.log(err));
 });
 
 

@@ -83,7 +83,7 @@ function sendFormDatatoLostPet(lostPet) {
     $.ajax(route, {
         type: 'POST',
         data: lostPet
-    }).then((response) => {
+    }).then(function (response) {
         console.log(`POST: ${response}`);
     }).catch(function (err) {
         if (err) throw err;
