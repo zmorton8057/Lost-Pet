@@ -4,11 +4,13 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      host : 'localhost',
-      database: 'postgres',
-      user: 'postgres',
-      password: keys.dbPassword
-    },
+      host : 'ec2-174-129-27-158.compute-1.amazonaws.com',
+      database: 'dehrib8tjjdqh',
+      user: 'lzvdgeunrsvdwy',
+      password: keys.dbPassword,
+      ssl: true
+    }
+  ,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -20,9 +22,11 @@ module.exports = {
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'postgres',
-      password: keys.dbPassword
+      host : 'ec2-174-129-27-158.compute-1.amazonaws.com',
+      database: 'dehrib8tjjdqh',
+      user: 'lzvdgeunrsvdwy',
+      password: keys.dbPassword,
+      ssl: true
     },
     pool: {
       min: 2,
@@ -36,9 +40,11 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'postgres',
-      password: keys.dbPassword
+      host : 'ec2-174-129-27-158.compute-1.amazonaws.com',
+      database: 'dehrib8tjjdqh',
+      user: 'lzvdgeunrsvdwy',
+      password: keys.dbPassword,
+      ssl: true
     },
     pool: {
       min: 2,
