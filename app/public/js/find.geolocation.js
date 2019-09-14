@@ -80,7 +80,9 @@ $(document).ready(function () {
                 useGeolocation: true
             };
             console.log(`all info passed back: ${JSON.stringify(lostPet)}`)
-            sendFormDatatoLostPetTWO(lostPet)            // convert lat/long to zip code by passing into google maps
+            // sendFormDatatoLostPetTWO(lostPet)            // convert lat/long to zip code by passing into google maps
+            sendFormDatatoLostPet(lostPet)
+
             $('#toggle-location').hide();
 
         } else if (!useGeolocation) {
@@ -94,34 +96,34 @@ $(document).ready(function () {
                 useGeolocation: false
             };
             console.log(`all info passed back: ${lostPet}`)
-            sendFormDatatoLostPetTWO(lostPet)
+            sendFormDatatoLostPet(lostPet)
         }
     })
 });
 
 // pass all form data to the back /api/lostPet
-// function sendFormDatatoLostPet(lostPet) {
+function sendFormDatatoLostPet(lostPet) {
 
-//     console.log("in form test: " + JSON.stringify(lostPet));
-//     var route = '/api/addLostPet'
-//     $.ajax(route, {
-//         type: 'POST',
-//         data: lostPet
-//     }).then(function (responseOne) {
-//         console.log(`POST: ${responseOne}`);
+    console.log("in form test: " + JSON.stringify(lostPet));
+    var route = '/api/addLostPet'
+    $.ajax(route, {
+        type: 'POST',
+        data: lostPet
+    }).then(function (responseOne) {
+        console.log(`POST: ${responseOne}`);
 
-//         $.ajax('/api/compare', {
-//             type: 'GET'
-//         }).then(function (responseTwo) {
-//             console.log('===== get similar ======')
-//             console.log(responseTwo)
-//         }).catch(function (err) {
-//             console.log(err)
-//         })
-//     }).catch(function (err) {
-//         if (err) throw err;
-//     })
-// };
+        $.ajax('/api/compare', {
+            type: 'GET'
+        }).then(function (responseTwo) {
+            console.log('===== get similar ======')
+            console.log(responseTwo)
+        }).catch(function (err) {
+            console.log(err)
+        })
+    }).catch(function (err) {
+        if (err) throw err;
+    })
+};
 
 function sendFormDatatoLostPetTWO(lostPet) {
     var currentImages = lostPet["images"];
@@ -172,6 +174,7 @@ function addPetInfoToDisplay(listOfComparedPets) {
     //fill the modal from all the available pets
     for (var i = 0; i < listOfComparedPets.length; i++) {
         var firstPetObj = listOfComparedPets[i].pet;
+        console.log(JSON.stringify(firstPetObj))
     }
 }
 
