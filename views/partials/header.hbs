@@ -1,10 +1,18 @@
 <nav class="navbar navbar-expand-lg p-1" id="nav-css">
     <div class="container m-0 d-flex flex-row justify-content-between" id="header-nav-container" >
+        {{#if user_name}}
         <div class="p-0">
-            <a class="navbar-brand mr-0 mt-0" href="/auth/google"><button class="btn btn-light text-dark mb-0"
+            <a class="navbar-brand mr-0 mt-0" href="/profile"><button class="btn button btn-light text-white mb-0" data-hover="Profile" 
+                style="font-size: 18px" id="googleButton"><img src="/images/1024px-Google__G__Logo.svg.png"
+                class="mr-2 mb-0" style="height: 28px; width: 28px;"><span>{{user_name}}</span></button></a>
+        </div>
+        {{else}} 
+        <div class="p-0">
+            <a class="navbar-brand mr-0 mt-0" href="/auth/google"><button class="btn btn-light mb-0 text-dark" 
                 style="font-size: 18px" id="googleButton"><img src="/images/1024px-Google__G__Logo.svg.png"
                 class="mr-2 mb-0" style="height: 28px; width: 28px;">Login with Google</button></a>
         </div>
+        {{/if}}
         <div class="p-0">
             <h1 id="home-header-appName" class="p-0 m-0 font-weight-bold" style="color: #D4DEEA" >Pet-911</h1>
         </div>

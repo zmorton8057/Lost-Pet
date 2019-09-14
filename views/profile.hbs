@@ -1,18 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col-6 d-flex justify-content-end ">
-            {{#if user_image1}}
-            <img alt="Profile Picture" src="{{user_image1}}" class="img-fluid mt-4  border border-dark" id="profile-image">
+            {{#if user_image}}
+            <img alt="Profile Picture" src="{{user_image}}" class="img-fluid mt-4  border border-dark" id="profile-image">
             {{else}}
-            <img alt="Profile Picture" src="/images/1.jpg" class="img-fluid mt-4" id="profile-image">
+            <img alt="Profile Picture" src="/images/default-image.jpg" class="img-fluid mt-4" id="profile-image">
             {{/if}}
         </div>
         <div class="col-5 mt-5 ml-0 justify-content-left">
             <p id="user-name" class="mb-0 mt-0 ml-0 font-weight-bold">{{user_name}}</p>
             <ul class="font-weight-bold">
                 <li>Pet owner in {{user_location}}</li>
-                <li>Pets found: {{user_petsFound}}</li>
-                <li>Bio: {{user_bio}}</li>
             </ul>
         </div>
     </div>

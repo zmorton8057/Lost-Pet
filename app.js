@@ -11,7 +11,7 @@ const passport = require('passport');
 require('dotenv').config();
 const keys = require('./config/config');
 const authRoutes = require('./app/routes/auth-routes/auth-routes');
-const formRoutes = require('./app/routes/form.route.js')
+const formRoutes = require('./app/routes/form.route.js');
 const PORT = process.env.PORT || 3000;
 const knex = require('./app/db/knex');
 const shuffle = require('./app/public/js/shuffle');
@@ -60,6 +60,25 @@ app.use(formRoutes);
 //route to upload File to S3
 // app.use(fileRoute);
 
+//check if logged in
+const homeAuthCheck = (req, res, result, user_image) => {
+    //if not logged in
+    if (!req.user) {
+        res.render('home', {
+            layout: 'default',
+            template: 'home-template',
+            pets: result,
+        });
+    } else {
+        res.render('home', {
+            layout: 'default',
+            template: 'home-template',
+            pets: result,
+            user_name: req.user[0].username
+        });
+    };
+};
+
 app.get('/', (req, res) => {
     knex('user_pets').where('lost_status', true)
         .then((result) => {
@@ -72,18 +91,30 @@ app.get('/', (req, res) => {
                 lost_status: x.lost_status,
                 pet_image1: x.pet_image1,
                 pet_image2: x.pet_image2,
+                user_id: x.user_id
             });
-            console.log(pets.pet_image1)
+            console.log(req.user)
+            console.log(pets)
             return pets
         })
         .then((result) => {
-            res.render('home', {
-                layout: 'default',
-                template: 'home-template',
-                pets: result
-            });
+            console.log(result)
+            for (var i = 0; i < result.length; i++) {
+                knex('users').where('user_id', result[i].user_id)
+                    .select('user_image')
+                    .then((res) => {
+                        result.user_image = res
+                    })
+            }
+            console.log(result)
+            return result
+        })
+        .then((result) => {
+            console.log(result)
+            homeAuthCheck(req, res, result);
         }).catch(err => console.log(err));
 });
+
 
 
 app.listen(PORT, function () {

@@ -28,10 +28,10 @@ router.get('/', authCheck, (req, res) => {
         layout: 'profile-layout',
         template: 'home-template',
         user_name: titleCase(req.user[0].username), 
+        user_image: req.user[0].user_image,
         user_location: 'Orange, Ca', 
         user_petsFound: 5, 
-        user_bio: 'Sweet old Lady with 2 Golden Retreivers and one orange cat', 
-        user_image1: 'https://wildewmn.files.wordpress.com/2014/02/older-woman-and-dog.jpg'
+        user_bio: 'Sweet old Lady with 2 Golden Retreivers and one orange cat'
     });
 }); 
 
@@ -50,6 +50,7 @@ router.get('/pets', (req, res) => {
             pet_age: x.pet_age,
             pet_image1: x.pet_image1, 
             pet_image2: x.pet_image2, 
+            pet_id: x.pet_id
         });
         return userPets
     }).then((result) => {
@@ -69,5 +70,32 @@ router.get('/add', authCheck, (req, res) => {
         user_name: titleCase(req.user[0].username)
     })
 }); 
+
+router.get('/matches', (req, res) => {
+    knex('matches').where('user_id', req.user[0].user_id).select('*')
+    .then((result) => {
+        console.log(result); 
+        let userPets = result.map(x => x = {
+            pet_name: titleCase(x.pet_name),
+            pet_breed: x.pet_breed,
+            color: x.color,
+            lost_status: x.lost_status, 
+            pet_coat: x.coat_type,
+            pet_sex: x.sex, 
+            pet_age: x.pet_age,
+            pet_image1: x.pet_image1, 
+            pet_image2: x.pet_image2, 
+            pet_id: x.pet_id
+        });
+        return userPets
+    }).then((result) => {
+    res.render('user-matches', {
+        layout: 'user-pets-layout',
+        template: 'home-template',
+        result, 
+        user_name: titleCase(req.user[0].username)
+    });
+    })
+})
 
 module.exports = { router, titleCase }   ; 

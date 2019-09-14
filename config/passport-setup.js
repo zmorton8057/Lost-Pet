@@ -23,8 +23,6 @@ passport.deserializeUser((id, done) => {
 });
 
 
-
-
 passport.use(
     new GoogleStrategy({
         //Google strategy options 
@@ -35,7 +33,7 @@ passport.use(
         //strategy callback 
         console.log('strategy started')
         console.log(profile)
-        let data = __.pick(profile, 'displayName', 'id', 'name')
+        let data = __.pick(profile, 'displayName', 'id', 'name', 'photos')
         console.log('data: ' + data)
         return new Promise((resolve, reject) => {
                 knex('users').select()
@@ -47,7 +45,8 @@ passport.use(
                             knex('users').insert({
                                     username: data.displayName,
                                     google_id: data.id,
-                                    user_id: data.name.familyName + Math.floor(Math.random() * 10000)
+                                    user_id: data.name.familyName + Math.floor(Math.random() * 10000), 
+                                    user_image: data.photos[0].value
                                 })
                                 .then((resp) => {
                                     resolve(resp)
