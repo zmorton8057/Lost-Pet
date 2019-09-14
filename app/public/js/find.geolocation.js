@@ -63,7 +63,11 @@ $(document).ready(function () {
 
         // ===================================
         // NEED TO ADD S3 TO CONVERT B64 BEFORE STORING TO DB
+        console.log('===images====')
 
+        if (images === undefined || images.length == 0) {
+            images = [''];
+        }
         event.preventDefault();
         // check if user used geolocation
         if (useGeolocation) {
@@ -104,8 +108,17 @@ function sendFormDatatoLostPet(lostPet) {
     $.ajax(route, {
         type: 'POST',
         data: lostPet
-    }).then(function (response) {
-        console.log(`POST: ${response}`);
+    }).then(function (responseOne) {
+        console.log(`POST: ${responseOne}`);
+
+        $.ajax('/api/compare', {
+            type: 'GET'
+        }).then(function (responseTwo) {
+            console.log('===== get similar ======')
+            console.log(responseTwo)
+        }).catch(function (err) {
+            console.log(err)
+        })
     }).catch(function (err) {
         if (err) throw err;
     })

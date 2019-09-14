@@ -17,7 +17,7 @@ var Pet = {
     knex
       .select()
       .from("user_pets")
-      .where("owner_id", ownerId)
+      .where("user_id", ownerId)
       .then(function (res) {
         return cb.json(res);
       })
