@@ -29,7 +29,7 @@ router.post('/api/addPet', function (req, res) {
     }
 
     let insertObj = __.pick(req.body, 'pet_name', 'pet_type', 'pet_breed', 'color', 'pet_size', 'coat_type', 'sex', 'pet_age', 'pet_zip');
-
+    insertObj.user_id = req.user[0].user_id; 
     // add pet is in the models
     knex('user_pets').insert(insertObj)
         .then((result) => {
@@ -77,5 +77,14 @@ router.post('/api/addLostPet', function (req, res) {
 router.get('/api/compare', function (req, res) {
     Pets.getPetsSimilarTo(req.body, res);
 });
+
+router.post('/api/toggle/:id', (req, res) => {
+    var query = `UPDATE user_pets SET lost_status = NOT lost_status WHERE pet_id = ${req.params.id};`
+    knex.raw(query)
+        .then((result) => {
+            // res.redirect(303, '/profile/pets'); 
+            res.send(result)
+        }).catch(err => console.log(err)); 
+}); 
 
 module.exports = router;
