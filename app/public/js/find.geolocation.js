@@ -74,14 +74,15 @@ $(document).ready(function () {
 
             // create array to be pass to the backend
             lostPet = {
-                images,
+                images: images,
                 formData,
                 finderLocation,
                 useGeolocation: true
             };
             console.log(`all info passed back: ${JSON.stringify(lostPet)}`)
-            sendFormDatatoLostPet(lostPet);
-            // convert lat/long to zip code by passing into google maps
+            // sendFormDatatoLostPetTWO(lostPet)            // convert lat/long to zip code by passing into google maps
+            sendFormDatatoLostPet(lostPet)
+
             $('#toggle-location').hide();
 
         } else if (!useGeolocation) {
@@ -89,13 +90,13 @@ $(document).ready(function () {
             finderLocation.push(inputZip);
             // create array to be pass to the backend
             lostPet = {
-                images,
+                images: images,
                 formData,
                 finderLocation,
                 useGeolocation: false
             };
             console.log(`all info passed back: ${lostPet}`)
-            sendFormDatatoLostPet(lostPet);
+            sendFormDatatoLostPet(lostPet)
         }
     })
 });
@@ -123,6 +124,59 @@ function sendFormDatatoLostPet(lostPet) {
         if (err) throw err;
     })
 };
+
+function sendFormDatatoLostPetTWO(lostPet) {
+    var currentImages = lostPet["images"];
+    console.log("ere ibs the back: " + currentImages);
+    var formData = new FormData();
+    formData.append("image", images[0]);
+
+    //add petPictures
+    axios({
+        method: "POST",
+        url: "/api/upload",
+        data: formData,
+        config: { headers: { "Content-Type": "multipart/form-data" } }
+    })
+        .then(function (response) {
+            //handle success
+            lostPet["images"][0] = response.data.url;
+            // POST request to add burger
+            var route = "/api/addLostPet";
+            $.ajax(route, {
+                type: "POST",
+                data: lostPet
+            })
+                .then(function (respsonse) {
+                    callComparePet(lostPet);
+                })
+                .catch(function (err) {
+                    if (err) throw err;
+                });
+        }).catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+}
+function callComparePet(pet) {
+    $.ajax("/api/compare", {
+        type: "POST",
+        data: pet
+    }).then(function (res) {
+        console.log(`POST: ${res}`);
+    });
+}
+
+function addPetInfoToDisplay(listOfComparedPets) {
+    //show  modal
+    $("#compareModal").modal("show");
+
+    //fill the modal from all the available pets
+    for (var i = 0; i < listOfComparedPets.length; i++) {
+        var firstPetObj = listOfComparedPets[i].pet;
+        console.log(JSON.stringify(firstPetObj))
+    }
+}
 
 // when user presses geolocation
 document.querySelector('#find-me').addEventListener('click', geoFindMe);
