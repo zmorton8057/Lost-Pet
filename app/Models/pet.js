@@ -138,8 +138,9 @@ var Pet = {
         } //end for
         //sort Array
         pointsObjArray.sort(function (pet1, pet2) {
-          cb.send(pet1.points > pet2.points);
+          return pet1.points > pet2.points;
         });
+        cb.json(JSON.stringify(pointsObjArray));
       });
   }
 };
