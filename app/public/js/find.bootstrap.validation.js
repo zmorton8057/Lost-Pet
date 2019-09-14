@@ -26,15 +26,7 @@ function getForm() {
         coatType
     };
 
-    // building validation if form has all data; wip
-    if (validateForm(formDataValidate)) {
-        console.log('form has all the data');
-    } else {
-        console.log('form does not have all the data')
-    }
-
     formData.push(petType, breed, color, size, coatType, sex, finderName, finderEmail, finderContact)
-
 }
 
 function validateForm(formDataValidate) {
