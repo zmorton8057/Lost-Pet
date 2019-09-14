@@ -17,6 +17,7 @@ const knex = require('./app/db/knex');
 const shuffle = require('./app/public/js/shuffle');
 const __ = require('lodash');
 const profileRoutes = require('./app/routes/profile-routes');
+var fileUpload = require('./app/routes/file-upload-route');
 
 app.set('view engine', 'hbs');
 
@@ -50,6 +51,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use(apiRoutes);
+app.use(fileUpload);
 app.use('/profile', profileRoutes.router)
 
 // use form routes
