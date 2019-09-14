@@ -48,12 +48,13 @@ var Pet = {
       });
   },
   addLostPet: function (petArrays, cb) {
+    console.log('\n===========add lost pet=========')
     console.log(petArrays)
     //info pulled from the req
     var images = petArrays["images"];
     var formData = petArrays['formData'];
-    var finderLocation = petArrays['finderLocation'];
-    console.log(images, formData, finderLocation);
+    var finderLocation = Number(petArrays['finderLocation']);
+
     //obj to be send to the back
     var finalObj = {
       pet_image1: "",
@@ -68,8 +69,11 @@ var Pet = {
       finder_name: "",
       finder_phone: "",
       finder_email: "",
-      last_zip: ""
+      last_zip: finderLocation
     };
+    console.log(JSON.stringify(finalObj))
+
+    console.log(finalObj['last_zip'])
 
     //obj keys array
     var keys = Object.keys(finalObj);
