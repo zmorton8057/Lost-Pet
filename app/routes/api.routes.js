@@ -42,6 +42,11 @@ router.post('/api/addLostPet', function (req, res) {
     // ===================================
     // NEED TO ADD S3 TO CONVERT B64 BEFORE STORING TO DB
 
+    if (!req.body['images']) {
+        req.body['images'] = ['']
+    }
+    console.log(req.body)
+
     // check for geolocation; convert coordinates to zip code
     if (req.body['useGeolocation']) {
 
@@ -60,6 +65,7 @@ router.post('/api/addLostPet', function (req, res) {
 
             // replace coordinates with zip code string
             req.body.finderLocation = response.data.results[0].address_components[7].short_name;
+
             Pets.addLostPet(req.body, res);
 
         });
