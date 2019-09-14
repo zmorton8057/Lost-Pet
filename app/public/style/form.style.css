@@ -27,3 +27,7 @@
 .uploaded-images {
     max-width: 300px;
 }
+
+#map-link {
+    color: black;
+}

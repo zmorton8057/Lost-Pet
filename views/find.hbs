@@ -34,7 +34,7 @@
                 <label for="pet-type">Pet type</label>
                 <div class="form-group">
                     <select class="form-control empty" id="pet-type" required>
-                        <option value="" selected disabled>Please select</option>
+                        <option value="" selected disabled>What am I?</option>
                         <option value="dog">Dog</option>
                         <option value="cat">Cat</option>
                     </select>
@@ -55,10 +55,10 @@
             </div>
 
             <div class="col-md-12">
-                <label for="color">Color (Choose most dominant color)</label>
+                <label for="color">Color</label>
                 <div class="form-group">
                     <select class="form-control empty" id="color" required>
-                        <option value="" selected disabled>Please select</option>
+                        <option value="" selected disabled>(Choose most dominant color)</option>
                         <option value="white">White</option>
                         <option value="black">Black</option>
                         <option value="brown">Brown</option>
@@ -76,7 +76,7 @@
                 <label for="size">Size</label>
                 <div class="form-group">
                     <select class="form-control empty" id="size" required>
-                        <option value="" selected disabled>Please select</option>
+                        <option value="" selected disabled>How big am I?</option>
                         <option value="sm">Small</option>
                         <option value="md">Medium</option>
                         <option value="lg">Large</option>
@@ -91,7 +91,7 @@
                 <label for="coat-type">Coat Type</label>
                 <div class="form-group">
                     <select class="form-control empty" id="coat-type" required>
-                        <option value="" selected disabled>Please select</option>
+                        <option value="" selected disabled>What does my coat look like?</option>
                         <option value="short">Short (or smooth-coated)</option>
                         <option value="medium">Medium</option>
                         <option value="long">Long</option>
@@ -124,15 +124,16 @@
             {{!-- toggle form button --}}
             <div class="text-center">
                 <button id="form-show" class="btn-outline-info btn-block">It's OK to contact me</button>
+
             </div>
         </div>
 
-        {{!-- line --}}
-        <hr class="m-3">
+
 
         {{!-- toggle show / hide contact --}}
         <div class="col-md-12" id="toggle-form">
-
+            {{!-- line --}}
+            <hr class="m-3">
             {{!-- finder contact message --}}
             <p>We will connect you to the owner if there is a match!</p>
 
@@ -154,7 +155,7 @@
 
         <div class="text-center">
             <!-- Link to open the modal and Submit Form -->
-            <button id="submit-form" class="btn btn-dark btn-lg btn-block mt-2" type="submit" data-toggle="modal"
+            <button id="submit-form" class="btn-danger btn-lg btn-block mt-2" type="submit" data-toggle="modal"
                 data-target="#location-modal">
                 Find Me!
             </button>
@@ -177,9 +178,20 @@
                 <p>Great! Where did you find me?</p>
 
                 {{!-- geolocation --}}
-                <button id="find-me" class="btn-outline-info btn-block">Use geolocation</button>
+                <button id="find-me" class="btn-outline-info btn-block mb-3">Use geolocation</button>
                 <p id="status"></p>
-                <a id="map-link" target="_blank"></a>
+
+                {{!-- show map button --}}
+                <button id="show-map-button" class="btn-outline-info btn-block mb-3">
+                    <a id="map-link" target="_blank"></a>
+                </button>
+
+                {{!-- loading spinner --}}
+                <div class="text-center p-2">
+                    <div id="modal-spinner" class="spinner-border text-info" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
 
                 {{!-- manual location --}}
                 <button id="toggle-location" class="btn-outline-dark btn-block">I want to enter a
@@ -207,7 +219,7 @@
         </div>
     </div>
 </div>
-{{!-- form js --}}
+
 <script src="/js/find.bootstrap.validation.js"></script>
 <script src="/js/find.upload.image.js"></script>
 <script src="/js/find.geolocation.js"></script>
