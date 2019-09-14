@@ -22,9 +22,9 @@ module.exports = {
   staging: {
     client: 'postgresql',
     connection: {
-      host : 'ec2-184-73-232-93.compute-1.amazonaws.com',
-      database: 'd7nc0lr2utmtve',
-      user: 'xxozsqylqnaynr',
+      host : 'ec2-174-129-27-158.compute-1.amazonaws.com',
+      database: 'dehrib8tjjdqh',
+      user: 'lzvdgeunrsvdwy',
       password: keys.dbPassword,
       ssl: true
     },
@@ -40,9 +40,9 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      host : 'ec2-184-73-232-93.compute-1.amazonaws.com',
-      database: 'd7nc0lr2utmtve',
-      user: 'xxozsqylqnaynr',
+      host : 'ec2-174-129-27-158.compute-1.amazonaws.com',
+      database: 'dehrib8tjjdqh',
+      user: 'lzvdgeunrsvdwy',
       password: keys.dbPassword,
       ssl: true
     },
