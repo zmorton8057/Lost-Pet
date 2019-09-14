@@ -4,10 +4,15 @@ var useGeolocation = false;
 var latitude;
 var longitude;
 
+$('#modal-spinner').hide();
+$('#show-map-button').hide();
+$('#status').hide();
+
 // when browser loads, check if geolocation is available on device
 if ("geolocation" in navigator) {
     /* geolocation is available */
     console.log('geolocation available on this device');
+
 } else {
     /* geolocation IS NOT available */
     console.log('geolocation NOT available on this device');
@@ -15,7 +20,7 @@ if ("geolocation" in navigator) {
 
 // execute when user selects geolocation method
 function geoFindMe() {
-
+    $('#modal-spinner').show();
     const status = document.querySelector('#status');
     const mapLink = document.querySelector('#map-link');
 
@@ -29,7 +34,12 @@ function geoFindMe() {
         useGeolocation = true;
         status.textContent = '';
         mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-        mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+        mapLink.textContent = `Geolocation Successful! Show map`;
+        finderLocation.push(latitude, longitude);
+        $('#modal-spinner').hide();
+        $('#find-me').hide();
+        $('#show-map-button').show();
+        $('#show-map-button').append(`<a href="${mapLink.href}">`)
     }
 
     function error() {
@@ -45,33 +55,44 @@ function geoFindMe() {
     }
 };
 
+// 
 // function submit form
 $(document).ready(function () {
-    $('#submit-location').click(function (event) {
+    $(document).on('click', '#submit-location', function (event) {
         var lostPet = {};
-        event.preventDefault();
 
+        // ===================================
+        // NEED TO ADD S3 TO CONVERT B64 BEFORE STORING TO DB
+
+        event.preventDefault();
         // check if user used geolocation
         if (useGeolocation) {
-            finderLocation.push(longitude, latitude);
+
+            // create array to be pass to the backend
+            lostPet = {
+                images,
+                formData,
+                finderLocation,
+                useGeolocation: true
+            };
+            console.log(`all info passed back: ${JSON.stringify(lostPet)}`)
+            sendFormDatatoLostPet(lostPet);
+            // convert lat/long to zip code by passing into google maps
+            $('#toggle-location').hide();
+
         } else if (!useGeolocation) {
             var inputZip = $('#inputZip').val().trim();
             finderLocation.push(inputZip);
+            // create array to be pass to the backend
+            lostPet = {
+                images,
+                formData,
+                finderLocation,
+                useGeolocation: false
+            };
+            console.log(`all info passed back: ${lostPet}`)
+            sendFormDatatoLostPet(lostPet);
         }
-        console.log('--------------------------')
-        console.log(`images: ${images.length}`);
-        console.log(`form data: ${formData}`);
-        console.log(`location: ${finderLocation}`);
-        console.log('--------------------------');
-
-        // create array to be pass to the backend
-        lostPet = {
-            images,
-            formData,
-            finderLocation
-        };
-        console.log(`all info passed back: ${lostPet}`)
-        sendFormDatatoLostPet(lostPet);
     })
 });
 
