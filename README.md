@@ -5,13 +5,13 @@ Demo: https://powerful-depths-35376.herokuapp.com/
 
 # Application
 ### Create a profile by logging into Google. (Passport)
-![](.app/public/assets/img/lost-pet-intro.gif)
+![](.app/public/images/lost-pet-intro.gif)
 
 ### Add or report a pet by uploading photos (Amazon AWS S3) and creating a profile.
-![](.app//public/assets/img/lost-pet-upload.gif)
+![](.app/public/images/lost-pet-upload.gif)
 
 ### Use geolocation to pinpoint lost pet location. (Geocoder)
-![](.app/public/assets/img/lost-pet-geo.gif)
+![](.app/public/images/lost-pet-geo.gif)
 
 # Configuration
 - Install NPM packages
