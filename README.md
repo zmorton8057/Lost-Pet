@@ -8,7 +8,7 @@ Demo: https://powerful-depths-35376.herokuapp.com/
 ![](.app/public/images/lost-pet-intro.gif)
 
 ### Add or report a pet by uploading photos (Amazon AWS S3) and creating a profile.
-![](.app//public/images/lost-pet-upload.gif)
+![](.app/public/images/lost-pet-upload.gif)
 
 ### Use geolocation to pinpoint lost pet location. (Geocoder)
 ![](.app/public/images/lost-pet-geo.gif)
